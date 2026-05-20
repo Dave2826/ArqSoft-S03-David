@@ -7,8 +7,6 @@ namespace CatalogoApp.Application.Services
     {
         private readonly IItemRepository _repo;
 
-        // El servicio recibe el repositorio por constructor
-        // No sabe si es JSON, SQL, memoria, etc.
         public ItemService(IItemRepository repo)
         {
             _repo = repo;
@@ -26,8 +24,6 @@ namespace CatalogoApp.Application.Services
 
         public void Agregar(Item item)
         {
-            // Aquí podrías agregar validaciones de negocio
-            // Por ejemplo: if (string.IsNullOrEmpty(item.Titulo)) throw...
             _repo.Agregar(item);
         }
 
@@ -36,18 +32,18 @@ namespace CatalogoApp.Application.Services
             _repo.Eliminar(id);
         }
 
-        // Método útil para el filtro por categoría/género
-        public List<Item> ObtenerPorGenero(string genero)
+        // FILTRO POR MARCA
+        public List<Item> ObtenerPorMarca(string marca)
         {
             return _repo.ObtenerTodos()
-                        .Where(i => i.Genero == genero)
+                        .Where(i => i.Marca == marca)
                         .ToList();
         }
 
-        public List<string> ObtenerGeneros()
+        public List<string> ObtenerMarcas()
         {
             return _repo.ObtenerTodos()
-                        .Select(i => i.Genero)
+                        .Select(i => i.Marca)
                         .Distinct()
                         .ToList();
         }

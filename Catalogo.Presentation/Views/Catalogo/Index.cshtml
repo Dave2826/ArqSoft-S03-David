@@ -1,0 +1,62 @@
+﻿@model IEnumerable<CatalogoApp.Domain.Models.Item>
+
+<div class="container">
+
+    <h1>Catálogo de Motos</h1>
+
+    <p class="contador-motos">
+        Total de motocicletas registradas: <strong>@Model.Count()</strong>
+    </p>
+
+    <div class="filtro">
+        <a asp-action="Index">Todas</a>
+
+        @foreach (var marca in ViewBag.Marcas as List<string>)
+        {
+            <a asp-action="Index" asp-route-marca="@marca">@marca</a>
+        }
+    </div>
+
+    @foreach (var item in Model)
+    {
+        <div class="card">
+
+            @if (!string.IsNullOrEmpty(item.ImagenUrl))
+            {
+                <img src="@Url.Content(item.ImagenUrl)"
+                     alt="@item.Nombre"
+                     class="card-img" />
+            }
+
+            <h3>
+                <a asp-action="Detalle" asp-route-id="@item.Id">
+                    @item.Nombre
+                </a>
+            </h3>
+
+            <p class="card-subtitle">
+                @item.Marca - @item.Ano | @item.Tipo
+            </p>
+
+            <div class="card-specs-mini">
+                <span>@item.Cilindrada</span>
+                <span>@item.Potencia</span>
+                <span>@item.VelocidadMax</span>
+            </div>
+
+            <div class="card-actions">
+                <a class="btn btn-editar-sm"
+                   asp-action="Editar"
+                   asp-route-id="@item.Id">
+                    Editar
+                </a>
+            </div>
+
+        </div>
+    }
+
+    <a class="btn" asp-action="Agregar">
+        + Agregar Moto
+    </a>
+
+</div>
