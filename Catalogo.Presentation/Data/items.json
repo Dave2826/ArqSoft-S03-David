@@ -6,7 +6,7 @@
     "Genero": "Accion",
     "Ano": 2022,
     "Descripcion": "Kratos y Atreus enfrentan el Ragnarok en una aventura epica.",
-    "ImagenUrl": "https://upload.wikimedia.org/wikipedia/en/e/ee/God_of_War_Ragnar%C3%B6k_cover.jpg",
+    "ImagenUrl": "/images/godofwar.jpg",
     "Plataforma": "PS5",
     "Duracion": "30 horas",
     "Clasificacion": "M"
@@ -30,9 +30,21 @@
     "Genero": "Accion",
     "Ano": 2023,
     "Descripcion": "Peter Parker y Miles Morales enfrentan nuevas amenazas.",
-    "ImagenUrl": "https://upload.wikimedia.org/wikipedia/en/e/eb/Marvel%27s_Spider-Man_2_cover_art.jpg",
+    "ImagenUrl": "/images/spiderman2.jpg",
     "Plataforma": "PS5",
     "Duracion": "20 horas",
     "Clasificacion": "T"
+  },
+  {
+    "Id": 4,
+    "Nombre": "Ghost of Tsushima",
+    "Desarrollador": "Sucker Punch Productions",
+    "Genero": "Accion Aventura",
+    "Ano": 2020,
+    "Descripcion": "Un samur\u00E1i debe adaptarse y evolucionar para defender Tsushima durante la invasi\u00F3n mongola en Jap\u00F3n feudal.",
+    "ImagenUrl": "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg",
+    "Plataforma": "PS5",
+    "Duracion": "25 horas",
+    "Clasificacion": "M"
   }
 ]

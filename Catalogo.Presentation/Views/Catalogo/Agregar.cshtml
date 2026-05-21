@@ -14,42 +14,53 @@
                 Agregar Juego
             </h1>
 
-            <form asp-action="Agregar" method="post">
+            <form asp-action="Agregar"
+                  method="post"
+                  id="formJuego">
 
                 <input asp-for="Nombre"
+                       id="Nombre"
                        class="form-control mb-3"
                        placeholder="Nombre del juego" />
 
                 <input asp-for="Desarrollador"
+                       id="Desarrollador"
                        class="form-control mb-3"
                        placeholder="Desarrollador (opcional)" />
 
                 <input asp-for="Genero"
+                       id="Genero"
                        class="form-control mb-3"
                        placeholder="Genero (opcional)" />
 
                 <input asp-for="Ano"
+                       id="Ano"
                        class="form-control mb-3"
                        placeholder="Año (opcional)" />
 
                 <textarea asp-for="Descripcion"
+                          id="Descripcion"
                           class="form-control mb-3"
                           placeholder="Descripcion">
                 </textarea>
 
                 <input asp-for="ImagenUrl"
+                       id="ImagenUrl"
                        class="form-control mb-3"
                        placeholder="URL de imagen (opcional)" />
 
                 <input asp-for="Plataforma"
+                       id="Plataforma"
                        class="form-control mb-3"
                        placeholder="Plataforma" />
 
                 <input asp-for="Duracion"
+                       id="Duracion"
                        class="form-control mb-3"
                        placeholder="Duracion" />
 
                 <input asp-for="Clasificacion"
+                       id="Clasificacion"
                        class="form-control mb-4"
                        placeholder="Clasificacion" />
 
@@ -67,3 +78,96 @@
     </div>
 
 </div>
+
+<script>
+
+    // GUARDAR AUTOMATICAMENTE EL ULTIMO JUEGO
+
+    document.getElementById("formJuego")
+        .addEventListener("submit", function () {
+
+            const juego = {
+
+                nombre:
+                    document.getElementById("Nombre").value,
+
+                desarrollador:
+                    document.getElementById("Desarrollador").value,
+
+                genero:
+                    document.getElementById("Genero").value,
+
+                ano:
+                    document.getElementById("Ano").value,
+
+                descripcion:
+                    document.getElementById("Descripcion").value,
+
+                imagenUrl:
+                    document.getElementById("ImagenUrl").value,
+
+                plataforma:
+                    document.getElementById("Plataforma").value,
+
+                duracion:
+                    document.getElementById("Duracion").value,
+
+                clasificacion:
+                    document.getElementById("Clasificacion").value
+            };
+
+            localStorage.setItem(
+                "ultimoJuego",
+                JSON.stringify(juego)
+            );
+
+        });
+
+    // RECUPERAR AUTOMATICAMENTE EL ULTIMO JUEGO
+
+    function cargarUltimoJuego() {
+
+        const juego =
+            JSON.parse(localStorage.getItem("ultimoJuego"));
+
+        if (!juego) {
+            return;
+        }
+
+        document.getElementById("Nombre").value =
+            juego.nombre || "";
+
+        document.getElementById("Desarrollador").value =
+            juego.desarrollador || "";
+
+        document.getElementById("Genero").value =
+            juego.genero || "";
+
+        document.getElementById("Ano").value =
+            juego.ano || "";
+
+        document.getElementById("Descripcion").value =
+            juego.descripcion || "";
+
+        document.getElementById("ImagenUrl").value =
+            juego.imagenUrl || "";
+
+        document.getElementById("Plataforma").value =
+            juego.plataforma || "";
+
+        document.getElementById("Duracion").value =
+            juego.duracion || "";
+
+        document.getElementById("Clasificacion").value =
+            juego.clasificacion || "";
+    }
+
+    // CARGAR AUTOMATICAMENTE AL ABRIR LA PAGINA
+
+    window.onload = function () {
+
+        cargarUltimoJuego();
+
+    };
+
+</script>
