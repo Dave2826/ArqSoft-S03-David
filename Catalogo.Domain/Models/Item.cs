@@ -5,22 +5,21 @@
         public int Id { get; set; }
 
         public string Nombre { get; set; } = string.Empty;
-        public string Marca { get; set; } = string.Empty;
-        public string Tipo { get; set; } = string.Empty;
 
-        public int Ano { get; set; }
+        public string Desarrollador { get; set; } = "S/N";
 
-        public string Descripcion { get; set; } = string.Empty;
+        public string Genero { get; set; } = "S/N";
 
-        public string ImagenUrl { get; set; } = string.Empty;
+        public int? Ano { get; set; }
 
-        // Ficha técnica
-        public string Cilindrada { get; set; } = string.Empty;
-        public string Potencia { get; set; } = string.Empty;
-        public string VelocidadMax { get; set; } = string.Empty;
-        public string Peso { get; set; } = string.Empty;
-        public string Transmision { get; set; } = string.Empty;
-        public string CapacidadTanque { get; set; } = string.Empty;
-        public string TipoMotor { get; set; } = string.Empty;
+        public string Descripcion { get; set; } = "S/N";
+
+        public string ImagenUrl { get; set; } = "/images/default-game.jpg";
+
+        public string Plataforma { get; set; } = "S/N";
+
+        public string Duracion { get; set; } = "S/N";
+
+        public string Clasificacion { get; set; } = "S/N";
     }
 }

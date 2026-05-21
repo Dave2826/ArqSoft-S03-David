@@ -32,18 +32,18 @@ namespace CatalogoApp.Application.Services
             _repo.Eliminar(id);
         }
 
-        // FILTRO POR MARCA
-        public List<Item> ObtenerPorMarca(string marca)
+        // Filtro por género
+        public List<Item> ObtenerPorGenero(string genero)
         {
             return _repo.ObtenerTodos()
-                        .Where(i => i.Marca == marca)
+                        .Where(i => i.Genero == genero)
                         .ToList();
         }
 
-        public List<string> ObtenerMarcas()
+        public List<string> ObtenerGeneros()
         {
             return _repo.ObtenerTodos()
-                        .Select(i => i.Marca)
+                        .Select(i => i.Genero)
                         .Distinct()
                         .ToList();
         }

@@ -1,62 +1,100 @@
-﻿@model IEnumerable<CatalogoApp.Domain.Models.Item>
+﻿@model List<CatalogoApp.Domain.Models.Item>
 
-<div class="container">
+@{
+    ViewData["Title"] = "PlayStation Game Catalog";
+}
 
-    <h1>Catálogo de Motos</h1>
+<div class="container mt-4">
 
-    <p class="contador-motos">
-        Total de motocicletas registradas: <strong>@Model.Count()</strong>
-    </p>
+    <h1 class="titulo-principal mb-4">
+        PlayStation Game Catalog
+    </h1>
 
-    <div class="filtro">
-        <a asp-action="Index">Todas</a>
+    <form method="get" class="mb-4">
 
-        @foreach (var marca in ViewBag.Marcas as List<string>)
-        {
-            <a asp-action="Index" asp-route-marca="@marca">@marca</a>
-        }
-    </div>
+        <select name="genero"
+                class="form-select filtro-ps"
+                onchange="this.form.submit()">
 
-    @foreach (var item in Model)
-    {
-        <div class="card">
+            <option value="">
+                Todos los géneros
+            </option>
 
-            @if (!string.IsNullOrEmpty(item.ImagenUrl))
+            @foreach (var genero in ViewBag.Generos)
             {
-                <img src="@Url.Content(item.ImagenUrl)"
-                     alt="@item.Nombre"
-                     class="card-img" />
+                if (ViewBag.GeneroActual == genero)
+                {
+                    <option value="@genero" selected>
+                        @genero
+                    </option>
+                }
+                else
+                {
+                    <option value="@genero">
+                        @genero
+                    </option>
+                }
             }
 
-            <h3>
-                <a asp-action="Detalle" asp-route-id="@item.Id">
-                    @item.Nombre
-                </a>
-            </h3>
+        </select>
 
-            <p class="card-subtitle">
-                @item.Marca - @item.Ano | @item.Tipo
-            </p>
+    </form>
 
-            <div class="card-specs-mini">
-                <span>@item.Cilindrada</span>
-                <span>@item.Potencia</span>
-                <span>@item.VelocidadMax</span>
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+
+                <div class="card tarjeta-ps h-100">
+
+                    <img src="@item.ImagenUrl"
+                         class="card-img-top imagen-juego" />
+
+                    <div class="card-body">
+
+                        <h4>@item.Nombre</h4>
+
+                        <p class="text-info">
+                            @item.Desarrollador
+                        </p>
+
+                        <p>
+                            @item.Descripcion
+                        </p>
+
+                        <span class="badge bg-primary">
+                            @item.Genero
+                        </span>
+
+                    </div>
+
+                    <div class="card-footer bg-transparent border-0">
+
+                        <a asp-action="Detalle"
+                           asp-route-id="@item.Id"
+                           class="btn btn-ps-detalle">
+
+                            Ver Detalle
+
+                        </a>
+
+                        <a asp-action="Eliminar"
+                           asp-route-id="@item.Id"
+                           class="btn btn-danger"
+                           onclick="return confirm('¿Seguro que deseas eliminar este juego?');">
+
+                            Eliminar
+
+                        </a>
+
+                    </div>
+
+                </div>
+
             </div>
+        }
 
-            <div class="card-actions">
-                <a class="btn btn-editar-sm"
-                   asp-action="Editar"
-                   asp-route-id="@item.Id">
-                    Editar
-                </a>
-            </div>
-
-        </div>
-    }
-
-    <a class="btn" asp-action="Agregar">
-        + Agregar Moto
-    </a>
+    </div>
 
 </div>

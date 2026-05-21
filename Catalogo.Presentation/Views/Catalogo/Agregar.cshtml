@@ -1,141 +1,69 @@
 ﻿@model CatalogoApp.Domain.Models.Item
 
-<div class="container editar-container">
+@{
+    ViewData["Title"] = "Agregar Juego";
+}
 
-    <a class="btn btn-volver" asp-action="Index">
-        <span class="flecha">&#8592;</span> Volver al catálogo
-    </a>
+<div class="container mt-5">
 
-    <h1>Agregar Moto</h1>
+    <div class="card tarjeta-formulario">
 
-    <form asp-action="Agregar" method="post" class="form-box editar-form">
+        <div class="card-body">
 
-        <div asp-validation-summary="ModelOnly" class="error-summary"></div>
+            <h1 class="mb-4">
+                Agregar Juego
+            </h1>
 
-        <div class="form-group">
-            <label asp-for="Nombre"></label>
-            <input asp-for="Nombre" placeholder="Ej: Kawasaki Ninja ZX6R" />
-            <span asp-validation-for="Nombre" class="error"></span>
-        </div>
+            <form asp-action="Agregar" method="post">
 
-        <div class="form-group">
-            <label asp-for="Marca"></label>
-            <input asp-for="Marca" placeholder="Ej: Kawasaki" />
-            <span asp-validation-for="Marca" class="error"></span>
-        </div>
+                <input asp-for="Nombre"
+                       class="form-control mb-3"
+                       placeholder="Nombre del juego" />
 
-        <div class="form-group">
-            <label asp-for="Tipo"></label>
-            <input asp-for="Tipo" placeholder="Ej: Deportiva" />
-            <span asp-validation-for="Tipo" class="error"></span>
-        </div>
+                <input asp-for="Desarrollador"
+                       class="form-control mb-3"
+                       placeholder="Desarrollador (opcional)" />
 
-        <div class="form-group">
-            <label asp-for="Ano"></label>
-            <input asp-for="Ano" type="number" placeholder="Ej: 2024" />
-            <span asp-validation-for="Ano" class="error"></span>
-        </div>
+                <input asp-for="Genero"
+                       class="form-control mb-3"
+                       placeholder="Genero (opcional)" />
 
-        <div class="form-group">
-            <label asp-for="Descripcion"></label>
-            <textarea asp-for="Descripcion"
-                      placeholder="Describe la moto con un estilo casual y atractivo"></textarea>
-            <span asp-validation-for="Descripcion" class="error"></span>
-        </div>
+                <input asp-for="Ano"
+                       class="form-control mb-3"
+                       placeholder="Año (opcional)" />
 
-        <div class="form-group">
-            <label asp-for="ImagenUrl"></label>
-            <input asp-for="ImagenUrl"
-                   placeholder="/images/Kawasaki Ninja 400.png" />
-            <span asp-validation-for="ImagenUrl" class="error"></span>
-        </div>
+                <textarea asp-for="Descripcion"
+                          class="form-control mb-3"
+                          placeholder="Descripcion">
+                </textarea>
 
-        @if (Model != null && !string.IsNullOrEmpty(Model.ImagenUrl))
-        {
-            <div class="preview-container">
+                <input asp-for="ImagenUrl"
+                       class="form-control mb-3"
+                       placeholder="URL de imagen (opcional)" />
 
-                <p class="preview-label">
-                    Vista previa:
-                </p>
+                <input asp-for="Plataforma"
+                       class="form-control mb-3"
+                       placeholder="Plataforma" />
 
-                <img src="@Url.Content(Model.ImagenUrl)"
-                     alt="Preview"
-                     class="preview-img" />
+                <input asp-for="Duracion"
+                       class="form-control mb-3"
+                       placeholder="Duracion" />
 
-            </div>
-        }
+                <input asp-for="Clasificacion"
+                       class="form-control mb-4"
+                       placeholder="Clasificacion" />
 
-        <h3 class="form-section-title">
-            Ficha técnica
-        </h3>
+                <button type="submit"
+                        class="btn btn-ps">
 
-        <div class="form-group">
-            <label asp-for="Cilindrada"></label>
-            <input asp-for="Cilindrada"
-                   placeholder="Ej: 636 cc" />
-            <span asp-validation-for="Cilindrada" class="error"></span>
-        </div>
+                    Guardar Juego
 
-        <div class="form-group">
-            <label asp-for="Potencia"></label>
-            <input asp-for="Potencia"
-                   placeholder="Ej: 130 HP @@ 13,500 rpm" />
-            <span asp-validation-for="Potencia" class="error"></span>
-        </div>
+                </button>
 
-        <div class="form-group">
-            <label asp-for="VelocidadMax"></label>
-            <input asp-for="VelocidadMax"
-                   placeholder="Ej: 250 km/h" />
-            <span asp-validation-for="VelocidadMax" class="error"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Peso"></label>
-            <input asp-for="Peso"
-                   placeholder="Ej: 196 kg" />
-            <span asp-validation-for="Peso" class="error"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Transmision"></label>
-            <input asp-for="Transmision"
-                   placeholder="Ej: 6 velocidades" />
-            <span asp-validation-for="Transmision" class="error"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="CapacidadTanque"></label>
-            <input asp-for="CapacidadTanque"
-                   placeholder="Ej: 17 L" />
-            <span asp-validation-for="CapacidadTanque" class="error"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="TipoMotor"></label>
-            <input asp-for="TipoMotor"
-                   placeholder="Ej: 4 cilindros en línea" />
-            <span asp-validation-for="TipoMotor" class="error"></span>
-        </div>
-
-        <div class="form-actions">
-
-            <button class="btn" type="submit">
-                Guardar Moto
-            </button>
-
-            <a class="btn-cancel" asp-action="Index">
-                Cancelar
-            </a>
+            </form>
 
         </div>
 
-    </form>
+    </div>
 
 </div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
