@@ -10,6 +10,15 @@
         PlayStation Game Catalog
     </h1>
 
+    <div class="busqueda-container mb-4">
+
+        <input type="text"
+               id="busquedaJuego"
+               class="form-control buscador-juegos"
+               placeholder="Buscar videojuegos..." />
+
+    </div>
+
     <form method="get" class="mb-4">
 
         <select name="genero"
@@ -44,62 +53,101 @@
 
         @foreach (var item in Model)
         {
-            <div class="col-md-4 mb-4">
+            <div class="col-lg-4 col-md-6 mb-4 juego-card">
 
-                <div class="card tarjeta-ps h-100">
+                <a asp-action="Detalle"
+                   asp-route-id="@item.Id"
+                   class="card-link">
 
-                    <a asp-action="Detalle"
-                       asp-route-id="@item.Id">
+                    <div class="card tarjeta-ps h-100">
 
-                        <img src="@item.ImagenUrl"
-                             class="card-img-top imagen-juego" />
+                        <div class="contenedor-imagen">
 
-                    </a>
+                            <img src="@item.ImagenUrl"
+                                 class="card-img-top imagen-juego" />
 
-                    <div class="card-body">
+                            <div class="overlay-juego">
 
-                        <h4>@item.Nombre</h4>
+                                <span class="badge bg-primary">
+                                    @item.Genero
+                                </span>
 
-                        <p class="text-info">
-                            @item.Desarrollador
-                        </p>
+                            </div>
 
-                        <p>
-                            @item.Descripcion
-                        </p>
+                        </div>
 
-                        <span class="badge bg-primary">
-                            @item.Genero
-                        </span>
+                        <div class="card-body">
+
+                            <h4 class="titulo-juego">
+                                @item.Nombre
+                            </h4>
+
+                            <p class="desarrollador-juego">
+                                @item.Desarrollador
+                            </p>
+
+                            <p class="descripcion-juego">
+                                @item.Descripcion
+                            </p>
+
+                        </div>
+
+                        <div class="card-footer footer-juego">
+
+                            <span class="plataforma-juego">
+                                @item.Plataforma
+                            </span>
+
+                            <a asp-action="Eliminar"
+                               asp-route-id="@item.Id"
+                               class="btn btn-danger btn-sm"
+                               onclick="event.stopPropagation(); return confirm('¿Eliminar este juego?');">
+
+                                Eliminar
+
+                            </a>
+
+                        </div>
 
                     </div>
 
-                    <div class="card-footer bg-transparent border-0">
-
-                        <a asp-action="Detalle"
-                           asp-route-id="@item.Id"
-                           class="btn btn-ps-detalle">
-
-                            Ver Detalle
-
-                        </a>
-
-                        <a asp-action="Eliminar"
-                           asp-route-id="@item.Id"
-                           class="btn btn-danger"
-                           onclick="return confirm('¿Seguro que deseas eliminar este juego?');">
-
-                            Eliminar
-
-                        </a>
-
-                    </div>
-
-                </div>
+                </a>
 
             </div>
         }
 
     </div>
+    <script>
+
+            const buscador =
+                document.getElementById("busquedaJuego");
+
+            buscador.addEventListener("keyup", function () {
+
+                const texto =
+                    buscador.value.toLowerCase();
+
+                const juegos =
+                    document.querySelectorAll(".juego-card");
+
+                juegos.forEach(juego => {
+
+                    const nombre =
+                        juego.innerText.toLowerCase();
+
+                    if (nombre.includes(texto)) {
+
+                        juego.style.display = "";
+
+                    } else {
+
+                        juego.style.display = "none";
+                    }
+
+                });
+
+            });
+
+    </script>
 
 </div>
