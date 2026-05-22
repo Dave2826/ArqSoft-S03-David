@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8" />
@@ -22,51 +23,115 @@
 
     <header>
 
-        <nav class="navbar navbar-expand-lg navbar-dark navbar-ps shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-ps">
 
-            <div class="container">
+    <div class="container">
 
-                <a class="navbar-brand fw-bold"
-                   asp-controller="Catalogo"
-                   asp-action="Index">
+        <a class="navbar-brand logo-ps"
+           asp-controller="Catalogo"
+           asp-action="Index">
 
-                    PLAYSTATION GAME CATALOG
+            PLAYSTATION GAME CATALOG
 
-                </a>
+        </a>
 
-                <button class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarContent">
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarContenido">
 
-                    <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
 
-                </button>
+        </button>
 
-                <div class="collapse navbar-collapse"
-                     id="navbarContent">
+        <div class="collapse navbar-collapse"
+             id="navbarContenido">
 
-                    <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto align-items-center">
 
-                        <li class="nav-item">
+                <li class="nav-item me-3">
 
-                            <a class="nav-link"
-                               asp-controller="Catalogo"
-                               asp-action="Index">
+                    <a class="nav-link"
+                       asp-controller="Catalogo"
+                       asp-action="Index">
 
-                                Inicio
+                        Inicio
 
-                            </a>
+                    </a>
 
-                        </li>
+                </li>
 
-                    </ul>
+                @if (Context.Session.GetString("Usuario") == null)
+                {
+                    <li class="nav-item me-2">
 
-                </div>
+                        <a class="btn btn-outline-info"
+                           asp-controller="Auth"
+                           asp-action="Login">
 
-            </div>
+                            Login
 
-        </nav>
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="btn btn-ps"
+                           asp-controller="Auth"
+                           asp-action="Register">
+
+                            Register
+
+                        </a>
+
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item me-3">
+
+                        <span class="usuario-activo">
+
+                            Hola,
+                            @Context.Session.GetString("Usuario")
+
+                        </span>
+
+                    </li>
+
+                    <li class="nav-item me-3">
+
+                        <a class="btn btn-ps"
+                           asp-controller="Catalogo"
+                           asp-action="Agregar">
+
+                            Agregar Juego
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="btn btn-danger"
+                           asp-controller="Auth"
+                           asp-action="Logout">
+
+                            Logout
+
+                        </a>
+
+                    </li>
+                }
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
 
     </header>
 
@@ -95,7 +160,7 @@
     </div>
 
     <footer class="footer-ps mt-5">
-
+        git commit -m "agregando sistema de login registro y sesiones"
         <div class="container text-center">
 
             © 2026 PlayStation Game Catalog
