@@ -365,3 +365,30 @@ h1, h2, h3, h4 {
     .buscador-juegos::placeholder {
         color: #94a3b8;
     }
+
+/* AUTH SYSTEM */
+
+.auth-container {
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(15,23,42,0.82);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(56,189,248,0.25);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 0 35px rgba(0,0,0,0.45);
+}
+
+.auth-title {
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 700;
+}

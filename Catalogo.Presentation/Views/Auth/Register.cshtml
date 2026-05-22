@@ -1,0 +1,62 @@
+﻿@model CatalogoApp.Domain.Models.User
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <h1 class="auth-title">
+            Crear Cuenta
+        </h1>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">
+                @ViewBag.Error
+            </div>
+        }
+
+        <form method="post">
+
+            <input asp-for="Username"
+                   class="form-control mb-3"
+                   placeholder="Nombre de usuario"
+                   required />
+
+            <input asp-for="Email"
+                   class="form-control mb-3"
+                   placeholder="Correo electrónico"
+                   required />
+
+            <input asp-for="Password"
+                   type="password"
+                   class="form-control mb-4"
+                   placeholder="Contraseña"
+                   required />
+
+            <button type="submit"
+                    class="btn btn-ps w-100">
+
+                Registrarse
+
+            </button>
+
+        </form>
+
+        <div class="mt-4 text-center">
+
+            <a asp-action="Login"
+               class="text-info">
+
+                Ya tengo cuenta
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

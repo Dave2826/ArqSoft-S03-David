@@ -1,11 +1,26 @@
 using CatalogoApp.Application.Services;
 using CatalogoApp.Domain.Interfaces;
 using CatalogoApp.Infrastructure.Repositories;
+using CatalogoApp.Application.Services;
+using CatalogoApp.Domain.Interfaces;
+using CatalogoApp.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Servicios MVC
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSingleton<IUserRepository>(
+    new JsonUserRepository(
+        Path.Combine(
+            builder.Environment.ContentRootPath,
+            "Data",
+            "users.json"
+        )
+    )
+);
+
+builder.Services.AddScoped<AuthService>();
 
 // Ruta del archivo JSON
 var jsonPath = Path.Combine(
@@ -25,6 +40,8 @@ builder.Services.AddScoped<ItemService>();
 // Authorization
 builder.Services.AddAuthorization();
 
+builder.Services.AddSession();
+
 var app = builder.Build();
 
 // Pipeline HTTP
@@ -39,6 +56,8 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapStaticAssets();
 
