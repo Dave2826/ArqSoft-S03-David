@@ -20,8 +20,11 @@ namespace CatalogoApp.Presentation.Controllers
                 ? _service.ObtenerTodos()
                 : _service.ObtenerPorGenero(genero);
 
-            ViewBag.Generos = _service.ObtenerGeneros();
-            ViewBag.GeneroActual = genero;
+            ViewBag.Generos =
+                _service.ObtenerGeneros();
+
+            ViewBag.GeneroActual =
+                genero;
 
             return View(items);
         }
@@ -29,7 +32,8 @@ namespace CatalogoApp.Presentation.Controllers
         // DETALLE
         public IActionResult Detalle(int id)
         {
-            var item = _service.ObtenerPorId(id);
+            var item =
+                _service.ObtenerPorId(id);
 
             if (item == null)
             {
@@ -39,16 +43,32 @@ namespace CatalogoApp.Presentation.Controllers
             return View(item);
         }
 
-        // GET
+        // GET AGREGAR
         public IActionResult Agregar()
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction(
+                    "Login",
+                    "Auth"
+                );
+            }
+
             return View();
         }
 
-        // POST
+        // POST AGREGAR
         [HttpPost]
         public IActionResult Agregar(Item item)
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction(
+                    "Login",
+                    "Auth"
+                );
+            }
+
             item.Desarrollador =
                 string.IsNullOrWhiteSpace(item.Desarrollador)
                 ? "S/N"
@@ -81,7 +101,7 @@ namespace CatalogoApp.Presentation.Controllers
 
             item.ImagenUrl =
                 string.IsNullOrWhiteSpace(item.ImagenUrl)
-                ? "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"
+                ? "/images/games/default.jpg"
                 : item.ImagenUrl;
 
             _service.Agregar(item);
@@ -92,6 +112,14 @@ namespace CatalogoApp.Presentation.Controllers
         // ELIMINAR
         public IActionResult Eliminar(int id)
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction(
+                    "Login",
+                    "Auth"
+                );
+            }
+
             _service.Eliminar(id);
 
             return RedirectToAction("Index");

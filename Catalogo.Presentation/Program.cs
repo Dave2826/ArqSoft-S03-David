@@ -1,9 +1,6 @@
 using CatalogoApp.Application.Services;
 using CatalogoApp.Domain.Interfaces;
 using CatalogoApp.Infrastructure.Repositories;
-using CatalogoApp.Application.Services;
-using CatalogoApp.Domain.Interfaces;
-using CatalogoApp.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 

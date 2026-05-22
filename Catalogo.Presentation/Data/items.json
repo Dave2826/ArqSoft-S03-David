@@ -34,5 +34,41 @@
     "Plataforma": "PS5",
     "Duracion": "25 horas",
     "Clasificacion": "M"
+  },
+  {
+    "Id": 4,
+    "Nombre": "Grand Theft Auto V",
+    "Desarrollador": "Rockstar Games",
+    "Genero": "Mundo Abierto",
+    "Ano": 2022,
+    "Descripcion": "Tres criminales realizan robos y sobreviven en la ciudad de Los Santos.",
+    "ImagenUrl": "/images/games/gtav.jpg",
+    "Plataforma": "PS5",
+    "Duracion": "35 horas",
+    "Clasificacion": "M"
+  },
+  {
+    "Id": 5,
+    "Nombre": "The Last of Us Part II Remastered",
+    "Desarrollador": "Naughty Dog",
+    "Genero": "Survival Horror",
+    "Ano": 2024,
+    "Descripcion": "Ellie enfrenta una intensa historia de venganza y supervivencia.",
+    "ImagenUrl": "/images/games/tlou2.jpg",
+    "Plataforma": "PS5",
+    "Duracion": "28 horas",
+    "Clasificacion": "M"
+  },
+  {
+    "Id": 6,
+    "Nombre": "Horizon Forbidden West",
+    "Desarrollador": "Guerrilla Games",
+    "Genero": "Accion RPG",
+    "Ano": 2022,
+    "Descripcion": "Aloy explora nuevas regiones enfrentando maquinas gigantes y amenazas misteriosas.",
+    "ImagenUrl": "/images/games/horizon.jpg",
+    "Plataforma": "PS5",
+    "Duracion": "35 horas",
+    "Clasificacion": "T"
   }
 ]

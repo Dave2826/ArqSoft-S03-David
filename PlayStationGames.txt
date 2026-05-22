@@ -1,0 +1,153 @@
+<PlayStationGames>
+
+    <Game>
+        <ImageName>godofwar.jpg</ImageName>
+        <Nombre>God of War Ragnarök</Nombre>
+        <Desarrollador>Santa Monica Studio</Desarrollador>
+        <Genero>Accion Aventura</Genero>
+        <Ano>2022</Ano>
+        <Descripcion>
+            Kratos y Atreus enfrentan el Ragnarok mientras exploran los nueve reinos nordicos.
+        </Descripcion>
+        <ImagenUrl>/images/games/godofwar.jpg</ImagenUrl>
+        <Plataforma>PS5</Plataforma>
+        <Duracion>30 horas</Duracion>
+        <Clasificacion>M</Clasificacion>
+    </Game>
+
+    <Game>
+        <ImageName>spiderman2.jpg</ImageName>
+        <Nombre>Marvel Spider-Man 2</Nombre>
+        <Desarrollador>Insomniac Games</Desarrollador>
+        <Genero>Accion</Genero>
+        <Ano>2023</Ano>
+        <Descripcion>
+            Peter Parker y Miles Morales unen fuerzas contra Venom y Kraven.
+        </Descripcion>
+        <ImagenUrl>/images/games/spiderman2.jpg</ImagenUrl>
+        <Plataforma>PS5</Plataforma>
+        <Duracion>20 horas</Duracion>
+        <Clasificacion>T</Clasificacion>
+    </Game>
+
+    <Game>
+        <ImageName>ghost.jpg</ImageName>
+        <Nombre>Ghost of Tsushima</Nombre>
+        <Desarrollador>Sucker Punch Productions</Desarrollador>
+        <Genero>Accion Aventura</Genero>
+        <Ano>2020</Ano>
+        <Descripcion>
+            Jin Sakai lucha por salvar Tsushima durante la invasion mongola.
+        </Descripcion>
+        <ImagenUrl>/images/games/ghost.jpg</ImagenUrl>
+        <Plataforma>PS5</Plataforma>
+        <Duracion>25 horas</Duracion>
+        <Clasificacion>M</Clasificacion>
+    </Game>
+
+    <Game>
+        <ImageName>gtav.jpg</ImageName>
+        <Nombre>Grand Theft Auto V</Nombre>
+        <Desarrollador>Rockstar Games</Desarrollador>
+        <Genero>Mundo Abierto</Genero>
+        <Ano>2022</Ano>
+        <Descripcion>
+            Tres criminales realizan robos y sobreviven en la ciudad de Los Santos.
+        </Descripcion>
+        <ImagenUrl>/images/games/gtav.jpg</ImagenUrl>
+        <Plataforma>PS5</Plataforma>
+        <Duracion>35 horas</Duracion>
+        <Clasificacion>M</Clasificacion>
+    </Game>
+
+    <Game>
+        <ImageName>tlou2.jpg</ImageName>
+        <Nombre>The Last of Us Part II Remastered</Nombre>
+        <Desarrollador>Naughty Dog</Desarrollador>
+        <Genero>Survival Horror</Genero>
+        <Ano>2024</Ano>
+        <Descripcion>
+            Ellie enfrenta una intensa historia de venganza y supervivencia.
+        </Descripcion>
+        <ImagenUrl>/images/games/tlou2.jpg</ImagenUrl>
+        <Plataforma>PS5</Plataforma>
+        <Duracion>28 horas</Duracion>
+        <Clasificacion>M</Clasificacion>
+    </Game>
+
+    <Game>
+        <ImageName>demonsouls.jpg</ImageName>
+        <Nombre>Demon's Souls</Nombre>
+        <Desarrollador>Bluepoint Games</Desarrollador>
+        <Genero>RPG Accion</Genero>
+        <Ano>2020</Ano>
+        <Descripcion>
+            Un desafiante remake lleno de enemigos brutales y exploracion oscura.
+        </Descripcion>
+        <ImagenUrl>/images/games/demonsouls.jpg</ImagenUrl>
+        <Plataforma>PS5</Plataforma>
+        <Duracion>25 horas</Duracion>
+        <Clasificacion>M</Clasificacion>
+    </Game>
+
+    <Game>
+        <ImageName>horizon.jpg</ImageName>
+        <Nombre>Horizon Forbidden West</Nombre>
+        <Desarrollador>Guerrilla Games</Desarrollador>
+        <Genero>Accion RPG</Genero>
+        <Ano>2022</Ano>
+        <Descripcion>
+            Aloy explora nuevas regiones enfrentando maquinas gigantes y amenazas misteriosas.
+        </Descripcion>
+        <ImagenUrl>/images/games/horizon.jpg</ImagenUrl>
+        <Plataforma>PS5</Plataforma>
+        <Duracion>35 horas</Duracion>
+        <Clasificacion>T</Clasificacion>
+    </Game>
+
+    <Game>
+        <ImageName>re4.jpg</ImageName>
+        <Nombre>Resident Evil 4 Remake</Nombre>
+        <Desarrollador>Capcom</Desarrollador>
+        <Genero>Survival Horror</Genero>
+        <Ano>2023</Ano>
+        <Descripcion>
+            Leon Kennedy debe rescatar a la hija del presidente en una aldea infectada.
+        </Descripcion>
+        <ImagenUrl>/images/games/re4.jpg</ImagenUrl>
+        <Plataforma>PS5</Plataforma>
+        <Duracion>18 horas</Duracion>
+        <Clasificacion>M</Clasificacion>
+    </Game>
+
+    <Game>
+        <ImageName>ff16.jpg</ImageName>
+        <Nombre>Final Fantasy XVI</Nombre>
+        <Desarrollador>Square Enix</Desarrollador>
+        <Genero>RPG</Genero>
+        <Ano>2023</Ano>
+        <Descripcion>
+            Clive Rosfield lucha en un mundo dominado por cristales y guerras epicas.
+        </Descripcion>
+        <ImagenUrl>/images/games/ff16.jpg</ImagenUrl>
+        <Plataforma>PS5</Plataforma>
+        <Duracion>40 horas</Duracion>
+        <Clasificacion>M</Clasificacion>
+    </Game>
+
+    <Game>
+        <ImageName>mw3.jpg</ImageName>
+        <Nombre>Call of Duty Modern Warfare III</Nombre>
+        <Desarrollador>Infinity Ward</Desarrollador>
+        <Genero>Shooter</Genero>
+        <Ano>2023</Ano>
+        <Descripcion>
+            Operaciones militares intensas y combates modernos en campañas globales.
+        </Descripcion>
+        <ImagenUrl>/images/games/mw3.jpg</ImagenUrl>
+        <Plataforma>PS5</Plataforma>
+        <Duracion>12 horas</Duracion>
+        <Clasificacion>M</Clasificacion>
+    </Game>
+
+</PlayStationGames>
