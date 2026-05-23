@@ -23,19 +23,6 @@
     "Plataforma": "PS5",
     "Duracion": "20 horas",
     "Clasificacion": "T",
-    "Favorito": true
-  },
-  {
-    "Id": 3,
-    "Nombre": "Ghost of Tsushima",
-    "Desarrollador": "Sucker Punch Productions",
-    "Genero": "Accion Aventura",
-    "Ano": 2020,
-    "Descripcion": "Un samurai debe adaptarse y evolucionar para defender Tsushima durante la invasion mongola.",
-    "ImagenUrl": "/images/games/ghost.jpg",
-    "Plataforma": "PS5",
-    "Duracion": "25 horas",
-    "Clasificacion": "M",
     "Favorito": false
   },
   {

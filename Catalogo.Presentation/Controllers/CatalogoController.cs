@@ -43,9 +43,27 @@ namespace CatalogoApp.Presentation.Controllers
 
             return View(item);
         }
+
+        public IActionResult Favoritos()
+        {
+            var favoritos = _service.ObtenerTodos()
+                .Where(x => x.Favorito)
+                .ToList();
+
+            return View(favoritos);
+        }
+
         [HttpPost]
         public IActionResult EliminarPost(int id)
         {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction(
+                    "Login",
+                    "Auth"
+                );
+            }
+
             _service.Eliminar(id);
 
             TempData["Mensaje"] =
@@ -145,14 +163,6 @@ namespace CatalogoApp.Presentation.Controllers
         }
         public IActionResult Favorito(int id)
         {
-            if (HttpContext.Session.GetString("Usuario") == null)
-            {
-                return RedirectToAction(
-                    "Login",
-                    "Auth"
-                );
-            }
-
             _service.ToggleFavorito(id);
 
             return RedirectToAction("Index");

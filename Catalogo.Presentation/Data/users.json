@@ -28,5 +28,11 @@
     "Username": "Dave",
     "Email": "dm1@gam.com",
     "Password": "Dimitri"
+  },
+  {
+    "Id": 6,
+    "Username": "Dave28",
+    "Email": "dm28@gam.com",
+    "Password": "Dimitri"
   }
 ]

@@ -1,116 +1,97 @@
-﻿@model CatalogoApp.Domain.Models.Item
+@model CatalogoApp.Domain.Models.Item
 
 @{
-    ViewData["Title"] = "Detalle";
+    ViewData["Title"] = Model.Nombre;
 }
 
-<div class="detalle-hero">
+<section class="detalle-container">
 
-    <img src="@Model.ImagenUrl"
-         class="detalle-bg" />
+    <div class="detalle-banner"
+         style="background-image: url('@Model.ImagenUrl');">
 
-    <div class="detalle-overlay">
+        <div class="detalle-overlay"></div>
 
-        <div class="container">
+        <div class="detalle-card">
 
-            <div class="detalle-contenido">
+            <div class="detalle-imagen-panel">
 
-                <div class="detalle-info">
+                <img src="@Model.ImagenUrl"
+                     alt="@Model.Nombre"
+                     class="detalle-imagen" />
 
-                    <span class="badge bg-primary mb-3">
+            </div>
+
+            <div class="detalle-info">
+
+                <div class="detalle-badges">
+
+                    <span class="detalle-badge">
                         @Model.Genero
                     </span>
 
-                    <h1 class="detalle-titulo">
-                        @Model.Nombre
-                    </h1>
+                    <span class="detalle-badge">
+                        @(Model.Ano?.ToString() ?? "S/N")
+                    </span>
 
-                    <h4 class="detalle-dev">
-                        @Model.Desarrollador
-                    </h4>
+                    <span class="detalle-badge">
+                        @Model.Clasificacion
+                    </span>
 
-                    <p class="detalle-desc">
-                        @Model.Descripcion
-                    </p>
+                </div>
 
-                    <div class="detalle-meta">
+                <h1 class="detalle-titulo">
+                    @Model.Nombre
+                </h1>
 
-                        <div class="meta-card">
+                <p class="detalle-desarrollador">
+                    @Model.Desarrollador
+                </p>
 
-                            <span class="meta-label">
-                                Plataforma
-                            </span>
+                <p class="detalle-descripcion">
+                    @Model.Descripcion
+                </p>
 
-                            <span class="meta-value">
-                                @Model.Plataforma
-                            </span>
+                <div class="detalle-acciones">
 
-                        </div>
+                    <a asp-action="Index"
+                       class="btn-volver">
+                        Volver al catálogo
+                    </a>
 
-                        <div class="meta-card">
-
-                            <span class="meta-label">
-                                Duración
-                            </span>
-
-                            <span class="meta-value">
-                                @Model.Duracion
-                            </span>
-
-                        </div>
-
-                        <div class="meta-card">
-
-                            <span class="meta-label">
-                                Clasificación
-                            </span>
-
-                            <span class="meta-value">
-                                @Model.Clasificacion
-                            </span>
-
-                        </div>
-
-                        <div class="meta-card">
-
-                            <span class="meta-label">
-                                Año
-                            </span>
-
-                            <span class="meta-value">
-                                @Model.Ano
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                    <div class="mt-4">
-
-                        <a asp-action="Index"
-                           class="btn btn-ps me-2">
-
-                            Volver al catálogo
-
-                        </a>
-
-                        <a asp-action="Eliminar"
-                           asp-route-id="@Model.Id"
-                           class="btn btn-danger"
-                           onclick="return confirm('¿Eliminar este juego?');">
-
-                            Eliminar
-
-                        </a>
-
-                    </div>
+                    <span class="btn-favorito-detalle @(Model.Favorito ? "favorito-activo" : string.Empty)">
+                        @(Model.Favorito ? "❤" : "♡")
+                    </span>
 
                 </div>
 
             </div>
 
+            <aside class="detalle-sidebar">
+
+                <div class="detalle-sidebar-card">
+                    <span>Plataforma</span>
+                    <strong>@Model.Plataforma</strong>
+                </div>
+
+                <div class="detalle-sidebar-card">
+                    <span>Duración</span>
+                    <strong>@Model.Duracion</strong>
+                </div>
+
+                <div class="detalle-sidebar-card">
+                    <span>Clasificación</span>
+                    <strong>@Model.Clasificacion</strong>
+                </div>
+
+                <div class="detalle-sidebar-card">
+                    <span>Favorito</span>
+                    <strong>@(Model.Favorito ? "Sí" : "No")</strong>
+                </div>
+
+            </aside>
+
         </div>
 
     </div>
 
-</div>
+</section>

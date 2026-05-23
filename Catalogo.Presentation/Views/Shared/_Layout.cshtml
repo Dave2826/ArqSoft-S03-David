@@ -1,4 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Http
+@inject CatalogoApp.Application.Services.ItemService ItemService
+@{
+    var cantidadFavoritos = ItemService.ObtenerTodos().Count(x => x.Favorito);
+}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -61,6 +65,21 @@
 
                 </li>
 
+                <li class="nav-item me-3">
+
+                    <a class="nav-link"
+                       asp-controller="Catalogo"
+                       asp-action="Favoritos">
+
+                        Favoritos
+                        <span class="contador-favoritos">
+                            @cantidadFavoritos
+                        </span>
+
+                    </a>
+
+                </li>
+
                 @if (Context.Session.GetString("Usuario") == null)
                 {
                     <li class="nav-item me-2">
@@ -69,23 +88,12 @@
                            asp-controller="Auth"
                            asp-action="Login">
 
-                            Login
+                            Iniciar Sesión
 
                         </a>
 
                     </li>
 
-                    <li class="nav-item">
-
-                        <a class="btn btn-ps"
-                           asp-controller="Auth"
-                           asp-action="Register">
-
-                            Register
-
-                        </a>
-
-                    </li>
                 }
                 else
                 {
@@ -118,7 +126,7 @@
                            asp-controller="Auth"
                            asp-action="Logout">
 
-                            Logout
+                            Cerrar sesión
 
                         </a>
 
@@ -137,17 +145,20 @@
 
     <div class="container mt-4">
 
-    <div class="d-flex justify-content-end mb-3">
+    @if (Context.Session.GetString("Usuario") != null)
+    {
+        <div class="d-flex justify-content-end mb-3">
 
-        <a asp-controller="Catalogo"
-           asp-action="Agregar"
-           class="btn btn-ps btn-global-agregar">
+            <a asp-controller="Catalogo"
+               asp-action="Agregar"
+               class="btn btn-ps btn-global-agregar">
 
-            Agregar Juego
+                Agregar Juego
 
-        </a>
+            </a>
 
-    </div>
+        </div>
+    }
 
     <main role="main" class="pb-4">
 

@@ -1,0 +1,127 @@
+@model List<CatalogoApp.Domain.Models.Item>
+
+@{
+    ViewData["Title"] = "Mis Favoritos";
+}
+
+<section class="favoritos-container">
+
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+
+        <div>
+
+            <span class="detalle-badge">
+                PlayStation Store
+            </span>
+
+            <h1 class="titulo-favoritos mt-3">
+                Mis Favoritos
+            </h1>
+
+        </div>
+
+        <a asp-action="Index"
+           class="btn-volver">
+            Volver al catálogo
+        </a>
+
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="favoritos-vacio">
+
+            <div class="favoritos-vacio-icono">
+                ♡
+            </div>
+
+            <h2>
+                No tienes juegos favoritos todavía
+            </h2>
+
+            <p>
+                Marca juegos con el corazón para verlos aquí.
+            </p>
+
+        </div>
+    }
+    else
+    {
+        <div class="row">
+
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-6 mb-4 juego-card">
+
+                    <div class="card tarjeta-ps h-100">
+
+                        <a asp-action="Detalle"
+                           asp-route-id="@item.Id"
+                           class="card-link">
+
+                            <div class="contenedor-imagen">
+
+                                <img src="@item.ImagenUrl"
+                                     class="card-img-top imagen-juego"
+                                     alt="@item.Nombre" />
+
+                                <div class="overlay-juego">
+
+                                    <span class="badge bg-primary">
+                                        @item.Genero
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="card-body">
+
+                                <h4 class="titulo-juego">
+                                    @item.Nombre
+                                </h4>
+
+                                <p class="desarrollador-juego">
+                                    @item.Desarrollador
+                                </p>
+
+                                <p class="descripcion-juego">
+                                    @item.Descripcion
+                                </p>
+
+                            </div>
+
+                        </a>
+
+                        <div class="card-footer footer-juego d-flex justify-content-between align-items-center">
+
+                            <span class="plataforma-juego">
+                                @item.Plataforma
+                            </span>
+
+                            <form asp-action="FavoritoPost"
+                                  method="post"
+                                  class="d-inline">
+
+                                <input type="hidden"
+                                       name="id"
+                                       value="@item.Id" />
+
+                                <button type="submit"
+                                        class="btn btn-favorito favorito-activo">
+                                    ❤
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+
+</section>
