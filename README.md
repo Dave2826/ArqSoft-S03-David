@@ -99,6 +99,6 @@ Catalogo.Presentation/Data/items.json
 Proyecto académico desarrollado para la materia de Arquitectura de Software.
 
 Desarrollado por:
-David Morales Guerrero
+David Morales 
 
 Tecnológico del Software
