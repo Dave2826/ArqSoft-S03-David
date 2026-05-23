@@ -6,6 +6,48 @@
 
 <div class="container mt-4">
 
+    @if (Model.Any())
+    {
+        <section class="hero-banner mb-5"
+                 aria-label="Juegos destacados">
+
+            @foreach (var item in Model.Take(5))
+            {
+                <div class="hero-slide"
+                     style="background-image: url('@item.ImagenUrl');">
+
+                    <div class="hero-overlay"></div>
+
+                    <div class="hero-content">
+
+                        <span class="detalle-badge">
+                            @item.Genero
+                        </span>
+
+                        <h2 class="hero-title">
+                            @item.Nombre
+                        </h2>
+
+                        <p class="hero-description">
+                            @(item.Descripcion.Length > 170
+                                ? item.Descripcion.Substring(0, 170) + "..."
+                                : item.Descripcion)
+                        </p>
+
+                        <a asp-action="Detalle"
+                           asp-route-id="@item.Id"
+                           class="hero-button">
+                            Ver detalles
+                        </a>
+
+                    </div>
+
+                </div>
+            }
+
+        </section>
+    }
+
     <h1 class="titulo-principal mb-4">
         PlayStation Game Catalog
     </h1>
@@ -63,7 +105,11 @@
 
                         <div class="contenedor-imagen">
 
-                            <img src="@item.ImagenUrl"
+                            <img src="@(string.IsNullOrEmpty(item.ImagenUrl) 
+                                 ? Url.Content("~/images/placeholder.jpg") 
+                                 : item.ImagenUrl)"
+                                 class="card-img-top imagen-juego"
+                                 onerror="this.onerror=null;this.src='@Url.Content("~/images/placeholder.jpg")';" />
                                  class="card-img-top imagen-juego" />
 
                             <div class="overlay-juego">
@@ -194,3 +240,8 @@
     });
 
 </script>
+
+@section Scripts {
+    <script src="~/js/hero-banner.js"
+            asp-append-version="true"></script>
+}

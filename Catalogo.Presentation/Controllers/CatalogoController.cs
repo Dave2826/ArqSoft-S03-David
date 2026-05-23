@@ -121,9 +121,8 @@ namespace CatalogoApp.Presentation.Controllers
 
             _service.Eliminar(id);
 
-            TempData["ToastMessage"] =
+            TempData["Success"] =
                 "Juego eliminado correctamente.";
-            TempData["ToastType"] = "success";
 
             return RedirectToAction("Index");
         }
@@ -137,10 +136,14 @@ namespace CatalogoApp.Presentation.Controllers
 
             GuardarFavoritosActuales(favoritos);
 
-            TempData["ToastMessage"] = favoritos.Contains(id)
-                ? "Juego agregado a favoritos."
-                : "Juego quitado de favoritos.";
-            TempData["ToastType"] = "success";
+            if (favoritos.Contains(id))
+            {
+                TempData["Success"] = "Juego agregado a favoritos.";
+            }
+            else
+            {
+                TempData["Info"] = "Juego quitado de favoritos.";
+            }
 
             if (!string.IsNullOrWhiteSpace(returnUrl)
                 && Url.IsLocalUrl(returnUrl))
@@ -214,9 +217,8 @@ namespace CatalogoApp.Presentation.Controllers
 
             _service.Agregar(item);
 
-            TempData["ToastMessage"] =
+            TempData["Success"] =
                 "Juego agregado correctamente.";
-            TempData["ToastType"] = "success";
 
             return RedirectToAction("Index");
         }
@@ -234,9 +236,8 @@ namespace CatalogoApp.Presentation.Controllers
 
             _service.Eliminar(id);
 
-            TempData["ToastMessage"] =
+            TempData["Success"] =
                 "Juego eliminado correctamente.";
-            TempData["ToastType"] = "success";
 
             return RedirectToAction("Index");
         }
@@ -248,10 +249,14 @@ namespace CatalogoApp.Presentation.Controllers
 
             GuardarFavoritosActuales(favoritos);
 
-            TempData["ToastMessage"] = favoritos.Contains(id)
-                ? "Juego agregado a favoritos."
-                : "Juego quitado de favoritos.";
-            TempData["ToastType"] = "success";
+            if (favoritos.Contains(id))
+            {
+                TempData["Success"] = "Juego agregado a favoritos.";
+            }
+            else
+            {
+                TempData["Info"] = "Juego quitado de favoritos.";
+            }
 
             return RedirectToAction("Index");
         }

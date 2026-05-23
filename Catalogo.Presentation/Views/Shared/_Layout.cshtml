@@ -5,6 +5,16 @@
     var cantidadFavoritos = string.IsNullOrWhiteSpace(favoritosJson)
         ? 0
         : JsonSerializer.Deserialize<List<int>>(favoritosJson)?.Count ?? 0;
+    var toastMessage = TempData["Success"] as string
+        ?? TempData["Error"] as string
+        ?? TempData["Info"] as string;
+    var toastType = TempData["Success"] != null
+        ? "success"
+        : TempData["Error"] != null
+            ? "error"
+            : TempData["Info"] != null
+                ? "info"
+                : "success";
 }
 <!DOCTYPE html>
 <html lang="es">
@@ -31,11 +41,11 @@
 
 <body>
 
-    @if (TempData["ToastMessage"] != null)
+    @if (!string.IsNullOrWhiteSpace(toastMessage))
     {
         <div class="toast-container"
-             data-toast-message="@TempData["ToastMessage"]"
-             data-toast-type="@(TempData["ToastType"] ?? "success")">
+             data-toast-message="@toastMessage"
+             data-toast-type="@toastType">
         </div>
     }
 
@@ -215,6 +225,9 @@
             asp-append-version="true"></script>
 
     <script src="~/js/toast.js"
+            asp-append-version="true"></script>
+
+    <script src="~/js/microanimations.js"
             asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)

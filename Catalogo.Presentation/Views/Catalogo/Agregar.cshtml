@@ -10,9 +10,16 @@
 
         <div class="card-body">
 
-            <h1 class="mb-4">
+            <h1 class="mb-2">
                 Agregar Juego
             </h1>
+
+            <p class="text-secondary mb-4">
+
+                Guarda las imágenes dentro de:
+                wwwroot/images/juegos
+
+            </p>
 
             <form asp-action="Agregar"
                   method="post"
@@ -46,8 +53,15 @@
 
                 <input asp-for="ImagenUrl"
                        id="ImagenUrl"
-                       class="form-control mb-3"
-                       placeholder="URL de imagen (opcional)" />
+                       class="form-control mb-1"
+                       placeholder="/images/juegos/nombre-del-juego.jpg" />
+
+                <small class="text-secondary d-block mb-3">
+
+                    Ejemplo:
+                    /images/juegos/ghost-of-tsushima.jpg
+
+                </small>
 
                 <input asp-for="Plataforma"
                        id="Plataforma"

@@ -65,9 +65,8 @@ namespace CatalogoApp.Presentation.Controllers
                 ViewBag.Error =
                     "Correo o contraseña incorrectos.";
 
-                TempData["ToastMessage"] =
+                TempData["Error"] =
                     "Correo o contraseña incorrectos.";
-                TempData["ToastType"] = "error";
 
                 return View();
             }
@@ -91,9 +90,8 @@ namespace CatalogoApp.Presentation.Controllers
                 "Favoritos",
                 JsonSerializer.Serialize(favoritosSincronizados));
 
-            TempData["ToastMessage"] =
+            TempData["Success"] =
                 $"Bienvenido, {user.Username}.";
-            TempData["ToastType"] = "success";
 
             return RedirectToAction(
                 "Index",
@@ -106,9 +104,8 @@ namespace CatalogoApp.Presentation.Controllers
         {
             HttpContext.Session.Clear();
 
-            TempData["ToastMessage"] =
+            TempData["Info"] =
                 "Sesión cerrada correctamente.";
-            TempData["ToastType"] = "success";
 
             return RedirectToAction("Login");
         }
