@@ -16,5 +16,17 @@
     "Username": "Dave",
     "Email": "deam@gamil.com",
     "Password": "dimitri2814"
+  },
+  {
+    "Id": 4,
+    "Username": "Dave",
+    "Email": "dm@gam.com",
+    "Password": "Dimitri"
+  },
+  {
+    "Id": 5,
+    "Username": "Dave",
+    "Email": "dm1@gam.com",
+    "Password": "Dimitri"
   }
 ]

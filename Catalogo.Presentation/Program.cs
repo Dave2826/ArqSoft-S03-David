@@ -27,9 +27,8 @@ var jsonPath = Path.Combine(
 );
 
 // Registrar repositorio
-builder.Services.AddSingleton<IItemRepository>(
-    new JsonItemRepository(jsonPath)
-);
+builder.Services.AddSingleton<IItemRepository,
+                               JsonItemRepository>();
 
 // Registrar servicio
 builder.Services.AddScoped<ItemService>();

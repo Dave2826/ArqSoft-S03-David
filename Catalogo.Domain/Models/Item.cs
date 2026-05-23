@@ -1,4 +1,4 @@
-﻿namespace CatalogoApp.Domain.Models
+namespace CatalogoApp.Domain.Models
 {
     public class Item
     {
@@ -21,5 +21,7 @@
         public string Duracion { get; set; } = "S/N";
 
         public string Clasificacion { get; set; } = "S/N";
+
+        public bool Favorito { get; set; }
     }
 }

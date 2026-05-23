@@ -55,11 +55,11 @@
         {
             <div class="col-lg-4 col-md-6 mb-4 juego-card">
 
-                <a asp-action="Detalle"
-                   asp-route-id="@item.Id"
-                   class="card-link">
+                <div class="card tarjeta-ps h-100">
 
-                    <div class="card tarjeta-ps h-100">
+                    <a asp-action="Detalle"
+                       asp-route-id="@item.Id"
+                       class="card-link">
 
                         <div class="contenedor-imagen">
 
@@ -92,62 +92,101 @@
 
                         </div>
 
-                        <div class="card-footer footer-juego">
+                    </a>
+
+                    <div class="card-footer
+                        footer-juego
+                        d-flex
+                        justify-content-between
+                        align-items-center">
+
+                        <div>
 
                             <span class="plataforma-juego">
                                 @item.Plataforma
                             </span>
 
-                            <a asp-action="Eliminar"
-                               asp-route-id="@item.Id"
-                               class="btn btn-danger btn-sm"
-                               onclick="event.stopPropagation(); return confirm('¿Eliminar este juego?');">
+                        </div>
 
-                                Eliminar
+                        <div class="d-flex gap-2 align-items-center">
 
-                            </a>
+                            <form asp-action="FavoritoPost"
+                                  method="post"
+                                  class="d-inline">
+
+                                <input type="hidden"
+                                       name="id"
+                                       value="@item.Id" />
+
+                                <button type="submit"
+                                        class="btn btn-favorito">
+
+                                    @(item.Favorito ? "❤" : "♡")
+
+                                </button>
+
+                            </form>
+
+                            <form asp-action="EliminarPost"
+                                  method="post"
+                                  class="d-inline"
+                                  onsubmit="return confirm('¿Eliminar este juego?');">
+
+                                <input type="hidden"
+                                       name="id"
+                                       value="@item.Id" />
+
+                                <button type="submit"
+                                        class="btn btn-danger btn-sm">
+
+                                    Eliminar
+
+                                </button>
+
+                            </form>
 
                         </div>
 
                     </div>
 
-                </a>
+                </div>
 
             </div>
         }
 
     </div>
-    <script>
-
-            const buscador =
-                document.getElementById("busquedaJuego");
-
-            buscador.addEventListener("keyup", function () {
-
-                const texto =
-                    buscador.value.toLowerCase();
-
-                const juegos =
-                    document.querySelectorAll(".juego-card");
-
-                juegos.forEach(juego => {
-
-                    const nombre =
-                        juego.innerText.toLowerCase();
-
-                    if (nombre.includes(texto)) {
-
-                        juego.style.display = "";
-
-                    } else {
-
-                        juego.style.display = "none";
-                    }
-
-                });
-
-            });
-
-    </script>
 
 </div>
+
+<script>
+
+    const buscador =
+        document.getElementById("busquedaJuego");
+
+    buscador.addEventListener("keyup", function () {
+
+        const texto =
+            buscador.value.toLowerCase();
+
+        const juegos =
+            document.querySelectorAll(".juego-card");
+
+        juegos.forEach(juego => {
+
+            const nombre =
+                juego.innerText.toLowerCase();
+
+            if (nombre.includes(texto)) {
+
+                juego.style.display = "";
+
+            } else {
+
+                juego.style.display = "none";
+            }
+
+        });
+
+    });
+
+</script>

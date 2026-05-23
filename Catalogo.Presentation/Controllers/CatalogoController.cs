@@ -31,6 +31,7 @@ namespace CatalogoApp.Presentation.Controllers
 
         // DETALLE
         public IActionResult Detalle(int id)
+
         {
             var item =
                 _service.ObtenerPorId(id);
@@ -41,6 +42,24 @@ namespace CatalogoApp.Presentation.Controllers
             }
 
             return View(item);
+        }
+        [HttpPost]
+        public IActionResult EliminarPost(int id)
+        {
+            _service.Eliminar(id);
+
+            TempData["Mensaje"] =
+                "Juego eliminado correctamente.";
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult FavoritoPost(int id)
+        {
+            _service.ToggleFavorito(id);
+
+            return RedirectToAction("Index");
         }
 
         // GET AGREGAR
@@ -121,6 +140,20 @@ namespace CatalogoApp.Presentation.Controllers
             }
 
             _service.Eliminar(id);
+
+            return RedirectToAction("Index");
+        }
+        public IActionResult Favorito(int id)
+        {
+            if (HttpContext.Session.GetString("Usuario") == null)
+            {
+                return RedirectToAction(
+                    "Login",
+                    "Auth"
+                );
+            }
+
+            _service.ToggleFavorito(id);
 
             return RedirectToAction("Index");
         }

@@ -9,7 +9,8 @@
     "ImagenUrl": "/images/games/godofwar.jpg",
     "Plataforma": "PS5",
     "Duracion": "30 horas",
-    "Clasificacion": "M"
+    "Clasificacion": "M",
+    "Favorito": false
   },
   {
     "Id": 2,
@@ -21,7 +22,8 @@
     "ImagenUrl": "/images/games/spiderman2.jpg",
     "Plataforma": "PS5",
     "Duracion": "20 horas",
-    "Clasificacion": "T"
+    "Clasificacion": "T",
+    "Favorito": true
   },
   {
     "Id": 3,
@@ -33,7 +35,8 @@
     "ImagenUrl": "/images/games/ghost.jpg",
     "Plataforma": "PS5",
     "Duracion": "25 horas",
-    "Clasificacion": "M"
+    "Clasificacion": "M",
+    "Favorito": false
   },
   {
     "Id": 4,
@@ -45,7 +48,8 @@
     "ImagenUrl": "/images/games/gtav.jpg",
     "Plataforma": "PS5",
     "Duracion": "35 horas",
-    "Clasificacion": "M"
+    "Clasificacion": "M",
+    "Favorito": true
   },
   {
     "Id": 5,
@@ -57,7 +61,8 @@
     "ImagenUrl": "/images/games/tlou2.jpg",
     "Plataforma": "PS5",
     "Duracion": "28 horas",
-    "Clasificacion": "M"
+    "Clasificacion": "M",
+    "Favorito": true
   },
   {
     "Id": 6,
@@ -69,6 +74,7 @@
     "ImagenUrl": "/images/games/horizon.jpg",
     "Plataforma": "PS5",
     "Duracion": "35 horas",
-    "Clasificacion": "T"
+    "Clasificacion": "T",
+    "Favorito": false
   }
 ]

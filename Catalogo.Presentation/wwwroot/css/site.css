@@ -412,3 +412,18 @@ h1, h2, h3, h4 {
     color: #38bdf8;
     font-weight: 600;
 }
+
+/* FAVORITOS */
+
+.btn-favorito {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: #ff4d6d;
+    transition: 0.3s;
+}
+
+    .btn-favorito:hover {
+        transform: scale(1.2);
+        color: #ff1744;
+    }

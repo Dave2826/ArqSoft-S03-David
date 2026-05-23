@@ -5,47 +5,106 @@ namespace CatalogoApp.Application.Services
 {
     public class ItemService
     {
-        private readonly IItemRepository _repo;
+        private readonly IItemRepository _repository;
 
-        public ItemService(IItemRepository repo)
+        public ItemService(IItemRepository repository)
         {
-            _repo = repo;
+            _repository = repository;
         }
 
         public List<Item> ObtenerTodos()
         {
-            return _repo.ObtenerTodos();
+            return _repository.ObtenerTodos();
         }
 
         public Item? ObtenerPorId(int id)
         {
-            return _repo.ObtenerPorId(id);
+            return _repository.ObtenerPorId(id);
         }
 
-        public void Agregar(Item item)
-        {
-            _repo.Agregar(item);
-        }
-
-        public void Eliminar(int id)
-        {
-            _repo.Eliminar(id);
-        }
-
-        // Filtro por género
         public List<Item> ObtenerPorGenero(string genero)
         {
-            return _repo.ObtenerTodos()
-                        .Where(i => i.Genero == genero)
-                        .ToList();
+            var items = _repository.ObtenerTodos();
+
+            if (string.IsNullOrWhiteSpace(genero))
+            {
+                return items;
+            }
+
+            return items
+                .Where(x => string.Equals(
+                    x.Genero,
+                    genero,
+                    StringComparison.OrdinalIgnoreCase))
+                .ToList();
         }
 
         public List<string> ObtenerGeneros()
         {
-            return _repo.ObtenerTodos()
-                        .Select(i => i.Genero)
-                        .Distinct()
-                        .ToList();
+            return _repository.ObtenerTodos()
+                .Select(x => x.Genero)
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .OrderBy(x => x)
+                .ToList();
+        }
+
+        public void Agregar(Item item)
+        {
+            var items = _repository.ObtenerTodos();
+
+            item.Id = items.Count > 0
+                ? items.Max(x => x.Id) + 1
+                : 1;
+
+            items.Add(item);
+
+            _repository.Guardar(items);
+        }
+
+        public void Eliminar(int id)
+        {
+            var items = _repository.ObtenerTodos();
+
+            var item =
+                items.FirstOrDefault(x => x.Id == id);
+
+            if (item != null)
+            {
+                items.Remove(item);
+
+                _repository.Guardar(items);
+            }
+        }
+
+        public void CambiarFavorito(int id)
+        {
+            var items = _repository.ObtenerTodos();
+
+            var item =
+                items.FirstOrDefault(x => x.Id == id);
+
+            if (item != null)
+            {
+                item.Favorito = !item.Favorito;
+
+                _repository.Guardar(items);
+            }
+        }
+
+        public void ToggleFavorito(int id)
+        {
+            var items = _repository.ObtenerTodos();
+
+            var item =
+                items.FirstOrDefault(x => x.Id == id);
+
+            if (item != null)
+            {
+                item.Favorito = !item.Favorito;
+
+                _repository.Guardar(items);
+            }
         }
     }
 }
