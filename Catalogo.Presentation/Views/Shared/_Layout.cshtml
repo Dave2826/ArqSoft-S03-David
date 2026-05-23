@@ -1,7 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Http
-@inject CatalogoApp.Application.Services.ItemService ItemService
+@using System.Text.Json
 @{
-    var cantidadFavoritos = ItemService.ObtenerTodos().Count(x => x.Favorito);
+    var favoritosJson = Context.Session.GetString("Favoritos");
+    var cantidadFavoritos = string.IsNullOrWhiteSpace(favoritosJson)
+        ? 0
+        : JsonSerializer.Deserialize<List<int>>(favoritosJson)?.Count ?? 0;
 }
 <!DOCTYPE html>
 <html lang="es">
@@ -21,9 +24,20 @@
     <link rel="stylesheet"
           href="~/Catalogo.Presentation.styles.css"
           asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 </head>
 
 <body>
+
+    @if (TempData["ToastMessage"] != null)
+    {
+        <div class="toast-container"
+             data-toast-message="@TempData["ToastMessage"]"
+             data-toast-type="@(TempData["ToastType"] ?? "success")">
+        </div>
+    }
 
     <header>
 
@@ -60,6 +74,18 @@
                        asp-action="Index">
 
                         Inicio
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item me-3">
+
+                    <a class="nav-link"
+                       asp-controller="Catalogo"
+                       asp-action="Dashboard">
+
+                        Dashboard
 
                     </a>
 
@@ -186,6 +212,9 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="~/js/site.js"
+            asp-append-version="true"></script>
+
+    <script src="~/js/toast.js"
             asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)

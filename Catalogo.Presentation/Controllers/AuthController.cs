@@ -1,16 +1,23 @@
 ﻿using CatalogoApp.Application.Services;
 using CatalogoApp.Domain.Models;
+using CatalogoApp.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace CatalogoApp.Presentation.Controllers
 {
     public class AuthController : Controller
     {
         private readonly AuthService _authService;
+        private readonly JsonFavoriteRepository _favoriteRepository;
 
-        public AuthController(AuthService authService)
+        public AuthController(
+            AuthService authService,
+            IWebHostEnvironment environment)
         {
             _authService = authService;
+            _favoriteRepository = new JsonFavoriteRepository(
+                Path.Combine(environment.ContentRootPath, "Data"));
         }
 
         // LOGIN VIEW
@@ -58,6 +65,10 @@ namespace CatalogoApp.Presentation.Controllers
                 ViewBag.Error =
                     "Correo o contraseña incorrectos.";
 
+                TempData["ToastMessage"] =
+                    "Correo o contraseña incorrectos.";
+                TempData["ToastType"] = "error";
+
                 return View();
             }
 
@@ -65,6 +76,24 @@ namespace CatalogoApp.Presentation.Controllers
                 "Usuario",
                 user.Username
             );
+
+            var favoritosTemporales = ObtenerFavoritosSesion();
+            var favoritosUsuario = _favoriteRepository.ObtenerPorUsuario(user.Username);
+
+            var favoritosSincronizados = favoritosUsuario
+                .Union(favoritosTemporales)
+                .OrderBy(x => x)
+                .ToList();
+
+            _favoriteRepository.Guardar(user.Username, favoritosSincronizados);
+
+            HttpContext.Session.SetString(
+                "Favoritos",
+                JsonSerializer.Serialize(favoritosSincronizados));
+
+            TempData["ToastMessage"] =
+                $"Bienvenido, {user.Username}.";
+            TempData["ToastType"] = "success";
 
             return RedirectToAction(
                 "Index",
@@ -77,7 +106,24 @@ namespace CatalogoApp.Presentation.Controllers
         {
             HttpContext.Session.Clear();
 
+            TempData["ToastMessage"] =
+                "Sesión cerrada correctamente.";
+            TempData["ToastType"] = "success";
+
             return RedirectToAction("Login");
+        }
+
+        private List<int> ObtenerFavoritosSesion()
+        {
+            var favoritos = HttpContext.Session.GetString("Favoritos");
+
+            if (string.IsNullOrWhiteSpace(favoritos))
+            {
+                return new List<int>();
+            }
+
+            return JsonSerializer.Deserialize<List<int>>(favoritos)
+                ?? new List<int>();
         }
     }
 }

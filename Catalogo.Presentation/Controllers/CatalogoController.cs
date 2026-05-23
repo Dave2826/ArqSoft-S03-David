@@ -1,16 +1,25 @@
 ﻿using CatalogoApp.Application.Services;
 using CatalogoApp.Domain.Models;
+using CatalogoApp.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace CatalogoApp.Presentation.Controllers
 {
     public class CatalogoController : Controller
     {
         private readonly ItemService _service;
+        private readonly FavoriteService _favoriteService;
+        private readonly JsonFavoriteRepository _favoriteRepository;
 
-        public CatalogoController(ItemService service)
+        public CatalogoController(
+            ItemService service,
+            IWebHostEnvironment environment)
         {
             _service = service;
+            _favoriteService = new FavoriteService();
+            _favoriteRepository = new JsonFavoriteRepository(
+                Path.Combine(environment.ContentRootPath, "Data"));
         }
 
         // LISTA PRINCIPAL
@@ -25,6 +34,10 @@ namespace CatalogoApp.Presentation.Controllers
 
             ViewBag.GeneroActual =
                 genero;
+
+            _favoriteService.AplicarEstado(
+                items,
+                ObtenerFavoritosActuales());
 
             return View(items);
         }
@@ -41,16 +54,58 @@ namespace CatalogoApp.Presentation.Controllers
                 return NotFound();
             }
 
+            _favoriteService.AplicarEstado(
+                new List<Item> { item },
+                ObtenerFavoritosActuales());
+
             return View(item);
         }
 
         public IActionResult Favoritos()
         {
-            var favoritos = _service.ObtenerTodos()
+            var items = _service.ObtenerTodos();
+            var favoritosActuales = ObtenerFavoritosActuales();
+
+            _favoriteService.AplicarEstado(items, favoritosActuales);
+
+            var favoritos = items
                 .Where(x => x.Favorito)
                 .ToList();
 
             return View(favoritos);
+        }
+
+        public IActionResult Dashboard()
+        {
+            var items = _service.ObtenerTodos();
+            var favoritosActuales = ObtenerFavoritosActuales();
+
+            _favoriteService.AplicarEstado(items, favoritosActuales);
+
+            ViewBag.TotalJuegos = items.Count;
+            ViewBag.TotalFavoritos = favoritosActuales.Count;
+            ViewBag.GeneroMasUsado = items
+                .Where(x => !string.IsNullOrWhiteSpace(x.Genero))
+                .GroupBy(x => x.Genero)
+                .OrderByDescending(x => x.Count())
+                .Select(x => x.Key)
+                .FirstOrDefault() ?? "S/N";
+            ViewBag.PlataformaMasUsada = items
+                .Where(x => !string.IsNullOrWhiteSpace(x.Plataforma))
+                .GroupBy(x => x.Plataforma)
+                .OrderByDescending(x => x.Count())
+                .Select(x => x.Key)
+                .FirstOrDefault() ?? "S/N";
+            ViewBag.UltimoJuego = items
+                .OrderByDescending(x => x.Id)
+                .FirstOrDefault()?.Nombre ?? "S/N";
+
+            var ultimosJuegos = items
+                .OrderByDescending(x => x.Id)
+                .Take(4)
+                .ToList();
+
+            return View(ultimosJuegos);
         }
 
         [HttpPost]
@@ -66,16 +121,32 @@ namespace CatalogoApp.Presentation.Controllers
 
             _service.Eliminar(id);
 
-            TempData["Mensaje"] =
+            TempData["ToastMessage"] =
                 "Juego eliminado correctamente.";
+            TempData["ToastType"] = "success";
 
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public IActionResult FavoritoPost(int id)
+        public IActionResult FavoritoPost(int id, string? returnUrl)
         {
-            _service.ToggleFavorito(id);
+            var favoritos = _favoriteService.CambiarFavorito(
+                ObtenerFavoritosActuales(),
+                id);
+
+            GuardarFavoritosActuales(favoritos);
+
+            TempData["ToastMessage"] = favoritos.Contains(id)
+                ? "Juego agregado a favoritos."
+                : "Juego quitado de favoritos.";
+            TempData["ToastType"] = "success";
+
+            if (!string.IsNullOrWhiteSpace(returnUrl)
+                && Url.IsLocalUrl(returnUrl))
+            {
+                return LocalRedirect(returnUrl);
+            }
 
             return RedirectToAction("Index");
         }
@@ -143,6 +214,10 @@ namespace CatalogoApp.Presentation.Controllers
 
             _service.Agregar(item);
 
+            TempData["ToastMessage"] =
+                "Juego agregado correctamente.";
+            TempData["ToastType"] = "success";
+
             return RedirectToAction("Index");
         }
 
@@ -159,13 +234,68 @@ namespace CatalogoApp.Presentation.Controllers
 
             _service.Eliminar(id);
 
+            TempData["ToastMessage"] =
+                "Juego eliminado correctamente.";
+            TempData["ToastType"] = "success";
+
             return RedirectToAction("Index");
         }
         public IActionResult Favorito(int id)
         {
-            _service.ToggleFavorito(id);
+            var favoritos = _favoriteService.CambiarFavorito(
+                ObtenerFavoritosActuales(),
+                id);
+
+            GuardarFavoritosActuales(favoritos);
+
+            TempData["ToastMessage"] = favoritos.Contains(id)
+                ? "Juego agregado a favoritos."
+                : "Juego quitado de favoritos.";
+            TempData["ToastType"] = "success";
 
             return RedirectToAction("Index");
+        }
+
+        private List<int> ObtenerFavoritosActuales()
+        {
+            var favoritosSesion = HttpContext.Session.GetString("Favoritos");
+
+            if (!string.IsNullOrWhiteSpace(favoritosSesion))
+            {
+                return JsonSerializer.Deserialize<List<int>>(favoritosSesion)
+                    ?? new List<int>();
+            }
+
+            var usuario = HttpContext.Session.GetString("Usuario");
+
+            if (!string.IsNullOrWhiteSpace(usuario))
+            {
+                var favoritosUsuario = _favoriteRepository.ObtenerPorUsuario(usuario);
+                GuardarFavoritosEnSesion(favoritosUsuario);
+
+                return favoritosUsuario;
+            }
+
+            return new List<int>();
+        }
+
+        private void GuardarFavoritosActuales(List<int> favoritos)
+        {
+            GuardarFavoritosEnSesion(favoritos);
+
+            var usuario = HttpContext.Session.GetString("Usuario");
+
+            if (!string.IsNullOrWhiteSpace(usuario))
+            {
+                _favoriteRepository.Guardar(usuario, favoritos);
+            }
+        }
+
+        private void GuardarFavoritosEnSesion(List<int> favoritos)
+        {
+            HttpContext.Session.SetString(
+                "Favoritos",
+                JsonSerializer.Serialize(favoritos));
         }
     }
 }

@@ -107,6 +107,10 @@
                                        name="id"
                                        value="@item.Id" />
 
+                                <input type="hidden"
+                                       name="returnUrl"
+                                       value="@(Context.Request.Path + Context.Request.QueryString)" />
+
                                 <button type="submit"
                                         class="btn btn-favorito favorito-activo">
                                     ❤

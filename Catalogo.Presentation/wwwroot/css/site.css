@@ -1077,3 +1077,277 @@ h1, h2, h3, h4 {
         font-size: 0.72rem;
     }
 }
+
+/* PLAYSTATION DASHBOARD */
+
+.dashboard-container {
+    position: relative;
+    padding: 42px 24px;
+    border-radius: 30px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 12% 10%, rgba(14, 165, 233, 0.24), transparent 30%),
+        radial-gradient(circle at 88% 0%, rgba(99, 102, 241, 0.2), transparent 28%),
+        linear-gradient(135deg, rgba(2, 6, 23, 0.98), rgba(7, 26, 58, 0.94));
+    border: 1px solid rgba(56, 189, 248, 0.16);
+    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.34);
+}
+
+.dashboard-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(56, 189, 248, 0.08), transparent);
+    pointer-events: none;
+}
+
+.dashboard-container > * {
+    position: relative;
+    z-index: 1;
+}
+
+.stat-card {
+    min-height: 190px;
+    padding: 26px;
+    border-radius: 26px;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    background: linear-gradient(145deg, rgba(0, 111, 205, 0.32), rgba(15, 23, 42, 0.86));
+    box-shadow: 0 22px 54px rgba(0, 0, 0, 0.32);
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-7px);
+    border-color: rgba(56, 189, 248, 0.52);
+    box-shadow: 0 30px 70px rgba(0, 111, 205, 0.22);
+}
+
+.stat-card-pink {
+    background: linear-gradient(145deg, rgba(255, 77, 109, 0.28), rgba(15, 23, 42, 0.86));
+}
+
+.stat-card-cyan {
+    background: linear-gradient(145deg, rgba(14, 165, 233, 0.3), rgba(15, 23, 42, 0.86));
+}
+
+.stat-card-violet {
+    background: linear-gradient(145deg, rgba(99, 102, 241, 0.3), rgba(15, 23, 42, 0.86));
+}
+
+.stat-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    color: #e0f2fe;
+    font-size: 1.45rem;
+    background: rgba(2, 6, 23, 0.38);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.stat-number {
+    color: #ffffff;
+    font-size: 3.1rem;
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+}
+
+.stat-text {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    word-break: break-word;
+}
+
+.stat-title {
+    display: block;
+    margin-top: 10px;
+    color: #cbd5e1;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.dashboard-section {
+    padding: 28px;
+    border-radius: 28px;
+    border: 1px solid rgba(56, 189, 248, 0.16);
+    background: rgba(15, 23, 42, 0.72);
+    box-shadow: 0 22px 58px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(14px);
+}
+
+.dashboard-section h2 {
+    color: #ffffff;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+}
+
+.dashboard-juegos {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.dashboard-card {
+    position: relative;
+    min-height: 310px;
+    overflow: hidden;
+    border-radius: 22px;
+    color: white;
+    text-decoration: none;
+    background: #020617;
+    box-shadow: 0 18px 46px rgba(0, 0, 0, 0.32);
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+
+.dashboard-card:hover {
+    color: white;
+    transform: translateY(-7px) scale(1.015);
+    box-shadow: 0 26px 64px rgba(14, 165, 233, 0.24);
+}
+
+.dashboard-card img {
+    width: 100%;
+    height: 100%;
+    min-height: 310px;
+    object-fit: cover;
+    display: block;
+    opacity: 0.82;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.dashboard-card:hover img {
+    transform: scale(1.06);
+    opacity: 0.95;
+}
+
+.dashboard-card div {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 20px;
+    background: linear-gradient(180deg, transparent, rgba(2, 6, 23, 0.94));
+}
+
+.dashboard-card span {
+    color: #38bdf8;
+    font-weight: 800;
+    font-size: 0.85rem;
+}
+
+.dashboard-card h3 {
+    margin: 6px 0;
+    color: white;
+    font-weight: 900;
+}
+
+.dashboard-card p {
+    margin: 0;
+    color: #cbd5e1;
+}
+
+@media (max-width: 1100px) {
+    .dashboard-juegos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .dashboard-container {
+        padding: 28px 14px;
+        border-radius: 22px;
+    }
+
+    .dashboard-section {
+        padding: 20px;
+        border-radius: 22px;
+    }
+
+    .dashboard-juegos {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* USER FAVORITES STATE */
+
+.btn-favorito,
+.btn-favorito-detalle {
+    cursor: pointer;
+}
+
+.btn-favorito.favorito-activo,
+.btn-favorito-detalle.favorito-activo {
+    color: #ff1744;
+    text-shadow: 0 0 18px rgba(255, 23, 68, 0.38);
+}
+
+/* PLAYSTATION TOASTS */
+
+.toast-container {
+    position: fixed;
+    top: 22px;
+    right: 22px;
+    z-index: 1080;
+    width: min(360px, calc(100vw - 28px));
+    pointer-events: none;
+}
+
+.toast-message {
+    position: relative;
+    overflow: hidden;
+    padding: 16px 18px 16px 20px;
+    border-radius: 18px;
+    background: rgba(2, 6, 23, 0.92);
+    border: 1px solid rgba(56, 189, 248, 0.26);
+    color: #e2e8f0;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    box-shadow: 0 22px 54px rgba(0, 0, 0, 0.42), 0 0 34px rgba(14, 165, 233, 0.16);
+    backdrop-filter: blur(16px);
+    opacity: 0;
+    transform: translateX(28px) translateY(-8px) scale(0.98);
+    transition: opacity 0.32s ease, transform 0.32s ease;
+}
+
+.toast-message::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: #0ea5ff;
+    box-shadow: 0 0 18px rgba(14, 165, 233, 0.7);
+}
+
+.toast-success::before {
+    background: #22c55e;
+    box-shadow: 0 0 18px rgba(34, 197, 94, 0.72);
+}
+
+.toast-error::before {
+    background: #ff1744;
+    box-shadow: 0 0 18px rgba(255, 23, 68, 0.72);
+}
+
+.toast-show {
+    opacity: 1;
+    transform: translateX(0) translateY(0) scale(1);
+}
+
+@media (max-width: 576px) {
+    .toast-container {
+        top: 14px;
+        right: 14px;
+        left: 14px;
+        width: auto;
+    }
+
+    .toast-message {
+        padding: 14px 16px 14px 18px;
+        border-radius: 16px;
+        font-size: 0.95rem;
+    }
+}

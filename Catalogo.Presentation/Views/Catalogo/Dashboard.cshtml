@@ -1,0 +1,120 @@
+@model List<CatalogoApp.Domain.Models.Item>
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<section class="dashboard-container">
+
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+
+        <div>
+
+            <span class="detalle-badge">
+                PlayStation Analytics
+            </span>
+
+            <h1 class="titulo-favoritos mt-3">
+                Dashboard
+            </h1>
+
+        </div>
+
+        <a asp-action="Index"
+           class="btn-volver">
+            Volver al catálogo
+        </a>
+
+    </div>
+
+    <div class="row g-4 mb-5">
+
+        <div class="col-xl-3 col-md-6">
+            <div class="stat-card">
+                <span class="stat-icon bi bi-controller"></span>
+                <div class="stat-number">@ViewBag.TotalJuegos</div>
+                <div class="stat-title">Total de juegos</div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="stat-card stat-card-pink">
+                <span class="stat-icon bi bi-heart-fill"></span>
+                <div class="stat-number">@ViewBag.TotalFavoritos</div>
+                <div class="stat-title">Total favoritos</div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="stat-card stat-card-cyan">
+                <span class="stat-icon bi bi-tags-fill"></span>
+                <div class="stat-number stat-text">@ViewBag.GeneroMasUsado</div>
+                <div class="stat-title">Género más usado</div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="stat-card stat-card-violet">
+                <span class="stat-icon bi bi-display"></span>
+                <div class="stat-number stat-text">@ViewBag.PlataformaMasUsada</div>
+                <div class="stat-title">Plataforma más usada</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="dashboard-section mb-5">
+
+        <div>
+            <span class="stat-title">Último juego agregado</span>
+            <h2>@ViewBag.UltimoJuego</h2>
+        </div>
+
+        <span class="stat-icon bi bi-stars"></span>
+
+    </div>
+
+    <div class="dashboard-section">
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+            <div>
+                <span class="detalle-badge">Actividad reciente</span>
+                <h2 class="mt-3 mb-0">Últimos juegos agregados</h2>
+            </div>
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="favoritos-vacio">
+                <h2>No hay juegos registrados todavía</h2>
+                <p>Agrega juegos para ver estadísticas aquí.</p>
+            </div>
+        }
+        else
+        {
+            <div class="dashboard-juegos">
+
+                @foreach (var item in Model)
+                {
+                    <a asp-action="Detalle"
+                       asp-route-id="@item.Id"
+                       class="dashboard-card">
+
+                        <img src="@item.ImagenUrl"
+                             alt="@item.Nombre" />
+
+                        <div>
+                            <span>@item.Genero</span>
+                            <h3>@item.Nombre</h3>
+                            <p>@item.Plataforma</p>
+                        </div>
+
+                    </a>
+                }
+
+            </div>
+        }
+
+    </div>
+
+</section>

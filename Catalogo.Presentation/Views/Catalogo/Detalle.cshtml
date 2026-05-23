@@ -58,9 +58,24 @@
                         Volver al catálogo
                     </a>
 
-                    <span class="btn-favorito-detalle @(Model.Favorito ? "favorito-activo" : string.Empty)">
-                        @(Model.Favorito ? "❤" : "♡")
-                    </span>
+                    <form asp-action="FavoritoPost"
+                          method="post"
+                          class="d-inline">
+
+                        <input type="hidden"
+                               name="id"
+                               value="@Model.Id" />
+
+                        <input type="hidden"
+                               name="returnUrl"
+                               value="@(Context.Request.Path + Context.Request.QueryString)" />
+
+                        <button type="submit"
+                                class="btn-favorito-detalle @(Model.Favorito ? "favorito-activo" : string.Empty)">
+                            @(Model.Favorito ? "❤" : "♡")
+                        </button>
+
+                    </form>
 
                 </div>
 
