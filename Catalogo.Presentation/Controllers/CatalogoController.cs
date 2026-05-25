@@ -19,7 +19,7 @@ namespace CatalogoApp.Presentation.Controllers
             _service = service;
             _favoriteService = new FavoriteService();
             _favoriteRepository = new JsonFavoriteRepository(
-                Path.Combine(environment.ContentRootPath, "Data"));
+                Path.Combine(environment.ContentRootPath, "Data", "favorites.json"));
         }
 
         // LISTA PRINCIPAL

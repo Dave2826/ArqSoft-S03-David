@@ -32,6 +32,17 @@ builder.Services.AddSingleton<IItemRepository,
 
 // Registrar servicio
 builder.Services.AddScoped<ItemService>();
+builder.Services.AddSingleton<IFavoriteRepository>(
+    new JsonFavoriteRepository(
+        Path.Combine(
+            builder.Environment.ContentRootPath,
+            "Data",
+            "favorites.json"
+        )
+    )
+);
+
+builder.Services.AddScoped<FavoriteService>();
 
 // Authorization
 builder.Services.AddAuthorization();

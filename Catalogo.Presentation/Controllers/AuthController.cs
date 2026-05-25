@@ -16,8 +16,13 @@ namespace CatalogoApp.Presentation.Controllers
             IWebHostEnvironment environment)
         {
             _authService = authService;
-            _favoriteRepository = new JsonFavoriteRepository(
-                Path.Combine(environment.ContentRootPath, "Data"));
+             _favoriteRepository = new JsonFavoriteRepository(
+                Path.Combine(
+                    environment.ContentRootPath,
+                    "Data",
+                    "favorites.json"
+                )
+             );
         }
 
         // LOGIN VIEW

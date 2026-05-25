@@ -1,8 +1,8 @@
-﻿using CatalogoApp.Domain.Interfaces;
+﻿using System.Collections.Generic;
 
 namespace CatalogoApp.Domain.Interfaces
 {
-    public class JsonFavoriteRepository : IFavoriteRepository
+    public interface IFavoriteRepository
     {
         List<int> ObtenerFavoritos(string usuario);
 

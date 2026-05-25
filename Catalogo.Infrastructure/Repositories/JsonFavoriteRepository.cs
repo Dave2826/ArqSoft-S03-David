@@ -1,61 +1,93 @@
+using CatalogoApp.Domain.Interfaces;
 using System.Text.Json;
 
 namespace CatalogoApp.Infrastructure.Repositories
 {
-    public class JsonFavoriteRepository
+    public class JsonFavoriteRepository : IFavoriteRepository
     {
-        private readonly string _dataPath;
+        private readonly string _rutaArchivo;
 
-        public JsonFavoriteRepository(string dataPath)
+        public JsonFavoriteRepository(string rutaArchivo)
         {
-            _dataPath = dataPath;
+            // Si le pasan un directorio o una ruta sin extensión, usar archivo por defecto dentro
+            if (Directory.Exists(rutaArchivo) || string.IsNullOrWhiteSpace(Path.GetExtension(rutaArchivo)))
+            {
+                Directory.CreateDirectory(rutaArchivo);
+                rutaArchivo = Path.Combine(rutaArchivo, "favorites.json");
+            }
+
+            _rutaArchivo = rutaArchivo;
+
+            var dir = Path.GetDirectoryName(_rutaArchivo);
+            if (!string.IsNullOrWhiteSpace(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+
+            if (!File.Exists(_rutaArchivo))
+            {
+                File.WriteAllText(_rutaArchivo, "{}");
+            }
         }
 
         public List<int> ObtenerPorUsuario(string usuario)
         {
-            var filePath = ObtenerRuta(usuario);
+            var json = File.ReadAllText(_rutaArchivo);
 
-            if (!File.Exists(filePath))
+            var data =
+                JsonSerializer.Deserialize
+                <Dictionary<string, List<int>>>(json)
+                ?? new Dictionary<string, List<int>>();
+
+            if (data.ContainsKey(usuario))
             {
-                File.WriteAllText(filePath, "[]");
+                return data[usuario];
             }
 
-            var json = File.ReadAllText(filePath);
-
-            return JsonSerializer.Deserialize<List<int>>(json)
-                ?? new List<int>();
+            return new List<int>();
         }
 
-        public void Guardar(string usuario, List<int> favoritos)
+        public void Guardar(
+            string usuario,
+            List<int> favoritos
+        )
         {
-            var filePath = ObtenerRuta(usuario);
+            var json = File.ReadAllText(_rutaArchivo);
 
-            var json = JsonSerializer.Serialize(
-                favoritos.Distinct().OrderBy(x => x).ToList(),
-                new JsonSerializerOptions
-                {
-                    WriteIndented = true
-                });
+            var data =
+                JsonSerializer.Deserialize
+                <Dictionary<string, List<int>>>(json)
+                ?? new Dictionary<string, List<int>>();
 
-            File.WriteAllText(filePath, json);
+            data[usuario] = favoritos;
+
+            var nuevoJson =
+                JsonSerializer.Serialize(
+                    data,
+                    new JsonSerializerOptions
+                    {
+                        WriteIndented = true
+                    });
+
+            File.WriteAllText(
+                _rutaArchivo,
+                nuevoJson
+            );
         }
 
-        private string ObtenerRuta(string usuario)
+        // IMPLEMENTACION INTERFAZ
+
+        public List<int> ObtenerFavoritos(string usuario)
         {
-            Directory.CreateDirectory(_dataPath);
+            return ObtenerPorUsuario(usuario);
+        }
 
-            var nombreSeguro = new string(usuario
-                .Where(x => char.IsLetterOrDigit(x) || x == '-' || x == '_')
-                .ToArray());
-
-            if (string.IsNullOrWhiteSpace(nombreSeguro))
-            {
-                nombreSeguro = "usuario";
-            }
-
-            return Path.Combine(
-                _dataPath,
-                $"favoritos_{nombreSeguro.ToLowerInvariant()}.json");
+        public void GuardarFavoritos(
+            string usuario,
+            List<int> favoritos
+        )
+        {
+            Guardar(usuario, favoritos);
         }
     }
 }

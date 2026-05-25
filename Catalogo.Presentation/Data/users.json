@@ -34,5 +34,11 @@
     "Username": "Dave28",
     "Email": "dm28@gam.com",
     "Password": "Dimitri"
+  },
+  {
+    "Id": 7,
+    "Username": "Dave18",
+    "Email": "prueba@gamail.com",
+    "Password": "prueba"
   }
 ]

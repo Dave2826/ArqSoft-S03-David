@@ -1,104 +1,221 @@
 # PlayStation Game Catalog
 
-Proyecto desarrollado en ASP.NET Core MVC utilizando arquitectura por capas.
-
-El sistema funciona como un catálogo interactivo de videojuegos de PlayStation 5, permitiendo administrar juegos, usuarios y sesiones mediante una interfaz moderna inspirada en plataformas como PlayStation Store y Steam.
+Aplicación web desarrollada con ASP.NET Core MVC inspirada en la experiencia visual moderna de PlayStation Store.
 
 ---
 
-# Tecnologías utilizadas
+## Descripción General
 
+Este proyecto consiste en una aplicación web enfocada en la administración de un catálogo de videojuegos de PlayStation utilizando ASP.NET Core MVC y arquitectura en capas.
+
+La aplicación permite visualizar videojuegos, agregar nuevos títulos, administrar favoritos, manejar sesiones de usuario y mostrar estadísticas mediante un dashboard interactivo, todo utilizando persistencia local con archivos JSON.
+
+Además de la parte técnica, también se buscó crear una interfaz moderna, visualmente atractiva y cómoda para el usuario, tomando inspiración en el estilo visual actual de PlayStation 5.
+
+---
+
+## Funcionalidades Implementadas
+
+- Arquitectura en 4 capas
 - ASP.NET Core MVC
-- C#
-- Arquitectura por capas
-- JSON como persistencia de datos
-- Bootstrap 5
-- CSS personalizado
-- Session Authentication
-- Git y GitHub
+- Sistema de autenticación
+- Inicio y cierre de sesión
+- Persistencia con archivos JSON
+- Dashboard interactivo
+- Sistema de favoritos
+- Persistencia de favoritos por usuario
+- Hero Banner dinámico
+- Búsqueda de videojuegos
+- Filtro por géneros
+- CRUD de videojuegos
+- Vista detalle personalizada
+- Diseño responsive
+- Interfaz inspirada en PlayStation
+- Cards dinámicas y modernas
+- Animaciones y microinteracciones
 
 ---
 
-# Arquitectura del proyecto
+## Tecnologías Utilizadas
 
-El proyecto se encuentra dividido en múltiples capas:
-
-## Catalogo.Domain
-Contiene:
-- Modelos
-- Interfaces
-- Entidades principales
-
-## Catalogo.Application
-Contiene:
-- Servicios
-- Lógica de negocio
-
-## Catalogo.Infrastructure
-Contiene:
-- Repositorios
-- Persistencia JSON
-
-## Catalogo.Presentation
-Contiene:
-- Controladores MVC
-- Views Razor
-- CSS
-- JavaScript
-- Assets
-- Navegación
+| Tecnología | Uso |
+|---|---|
+| ASP.NET Core MVC | Arquitectura principal |
+| C# | Backend |
+| Razor Views | Front-End dinámico |
+| CSS3 | Diseño visual |
+| JavaScript | Interactividad |
+| JSON | Persistencia local |
 
 ---
 
-# Funcionalidades actuales
+## Arquitectura del Proyecto
 
-## Catálogo de videojuegos
-- Visualización de juegos
-- Cards premium estilo PlayStation
-- Vista detalle avanzada
-- Hover interactivo
-- Filtros por género
-- Búsqueda en tiempo real
+El sistema se encuentra dividido en cuatro capas principales:
 
-## Sistema de usuarios
-- Registro de usuarios
-- Inicio de sesión
-- Persistencia en users.json
-- Manejo de sesiones
-- Navbar dinámica
-- Logout
+```bash
+CatalogoApp/
+│
+├── Catalogo.Domain
+├── Catalogo.Application
+├── Catalogo.Infrastructure
+└── Catalogo.Presentation
+```
 
-## Protección de rutas
-- Restricción para agregar juegos
-- Restricción para eliminar juegos
-- Validación por sesión
+### Domain
+Contiene los modelos, entidades e interfaces principales del sistema.
 
-## Persistencia de datos
-- Juegos almacenados en items.json
-- Usuarios almacenados en users.json
+### Application
+Contiene la lógica de negocio y los servicios de autenticación, videojuegos y favoritos.
 
-## Experiencia visual
-- Diseño gamer oscuro
-- Glow effects
-- Animaciones hover
-- Responsive design
-- Estilo inspirado en PS Store
+### Infrastructure
+Contiene la persistencia de datos mediante archivos JSON y los repositorios.
+
+### Presentation
+Contiene los controladores MVC, vistas Razor, estilos CSS, JavaScript y recursos visuales.
 
 ---
 
-# Estructura de datos
+## Persistencia de Datos
 
-## Juegos
-Los videojuegos se almacenan en:
+La aplicación utiliza archivos JSON para almacenar la información del sistema:
 
-```text	
-Catalogo.Presentation/Data/items.json
+```bash
+Data/
+│
+├── items.json
+├── users.json
+└── favorites.json
+```
 
-## Autor
+Esto permite:
+- guardar videojuegos
+- almacenar usuarios
+- mantener favoritos por sesión
+- evitar depender de una base de datos externa
 
-Proyecto académico desarrollado para la materia de Arquitectura de Software.
+---
 
-Desarrollado por:
+## Principios SOLID Aplicados
+
+### SRP — Single Responsibility Principle
+
+Cada servicio y repositorio tiene una única responsabilidad dentro del sistema.
+
+### DIP — Dependency Inversion Principle
+
+La aplicación utiliza interfaces para desacoplar servicios y repositorios.
+
+Ejemplos:
+- IItemRepository
+- IUserRepository
+- IFavoriteRepository
+
+---
+
+# Interfaz del Proyecto
+
+## Inicio
+
+![Inicio](README_IMAGES/inicio.png)
+
+---
+
+## Dashboard
+
+![Dashboard](README_IMAGES/dashboard.png)
+
+---
+
+## Favoritos
+
+![Favoritos](README_IMAGES/favoritos.png)
+
+---
+
+## Login
+
+![Login](README_IMAGES/login.png)
+
+---
+
+## Agregar Juego
+
+![Agregar Juego](README_IMAGES/agregar-juego.png)
+
+---
+
+## Vista Detalle
+
+![Detalle](README_IMAGES/detalle.png)
+
+---
+
+## Arquitectura en Capas
+
+La solución utiliza separación de responsabilidades mediante arquitectura en capas para mejorar el mantenimiento y organización del sistema.
+
+![Arquitectura](README_IMAGES/arquitectura.png)
+
+---
+
+## Experiencia Visual
+
+La interfaz fue diseñada tomando inspiración en el estilo moderno de PlayStation 5, buscando una experiencia visual más limpia y atractiva para el usuario.
+
+El proyecto incluye:
+- Hero Banner dinámico
+- Diseño oscuro moderno
+- Tarjetas animadas
+- Hover effects
+- Dashboard visual
+- Diseño responsive
+- Navegación intuitiva
+- Microanimaciones
+
+---
+
+## Instalación
+
+### Clonar repositorio
+
+```bash
+git clone <repositorio>
+```
+
+### Restaurar paquetes
+
+```bash
+dotnet restore
+```
+
+### Ejecutar proyecto
+
+```bash
+dotnet run
+```
+
+---
+
+## Uso de Inteligencia Artificial
+
+Durante el desarrollo se utilizó inteligencia artificial como herramienta de apoyo para:
+
+- resolución puntual de errores
+- organización visual
+- optimización de interfaz
+- mejora estructural del proyecto
+- apoyo en arquitectura MVC
+
+Todo el desarrollo, adaptación, integración y pruebas finales fueron realizados manualmente dentro del proyecto.
+
+---
+
+## Desarrollado por
+
 David Morales.
 
-Tecnológico del Software
+Tecnológico del Software  
+Materia: Arquitectura de Software
+
+---

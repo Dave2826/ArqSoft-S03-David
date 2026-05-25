@@ -1,9 +1,0 @@
-<Solution>
-  <Folder Name="/Elementos de la solución/">
-    <File Path="README.md" />
-  </Folder>
-  <Project Path="Catalogo.Application/Catalogo.Application.csproj" />
-  <Project Path="Catalogo.Domain/Catalogo.Domain.csproj" />
-  <Project Path="Catalogo.Infrastructure/Catalogo.Infrastructure.csproj" />
-  <Project Path="Catalogo.Presentation/Catalogo.Presentation.csproj" />
-</Solution>
